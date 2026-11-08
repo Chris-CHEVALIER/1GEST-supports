@@ -324,43 +324,117 @@ rapport-final-v3-VRAIMENT-final.docx
 
   <!-- ================================================================== -->
   <section>
-    <h2>Markdown : ce que vous écrirez dans le dépôt</h2>
+    <h2>Markdown : la syntaxe en une diapo</h2>
     <div class="corps">
-      <div class="colonnes">
+      <p><strong>Markdown</strong> : du texte simple et quelques symboles. Fichier en <code>.md</code>, affiché mis en forme par GitHub.</p>
+      <div class="colonnes" style="font-size: .82em;">
         <div>
-          <pre data-titre="docs/user-stories.md"><code class="language-markdown" data-trim>
-# User stories
-
-## Sprint 1
-
-- **En tant qu'**étudiant,
-  **je veux** publier un trajet
-  **afin de** partager les frais.
-- **En tant que** conducteur,
-  **je veux** accepter un passager.
-
-Voir le [besoin](besoin.md).
-          </code></pre>
+          <table class="dense">
+            <tr><th>J'écris</th><th>J'obtiens</th></tr>
+            <tr><td><code># Titre</code></td><td>le titre du document (un seul)</td></tr>
+            <tr><td><code>## Section</code> · <code>### Sous-section</code></td><td>des titres de section</td></tr>
+            <tr><td><code>**important**</code> · <code>*nuance*</code></td><td><strong>important</strong> · <em>nuance</em></td></tr>
+            <tr><td><code>- élément</code></td><td>une liste à puces</td></tr>
+            <tr><td><code>1. étape</code></td><td>une liste numérotée</td></tr>
+            <tr><td><code>- [ ] à faire</code> · <code>- [x] fait</code></td><td>des cases à cocher</td></tr>
+          </table>
         </div>
         <div>
-          <table>
+          <table class="dense">
             <tr><th>J'écris</th><th>J'obtiens</th></tr>
-            <tr><td><code># Titre</code></td><td>un grand titre</td></tr>
-            <tr><td><code>## Sous-titre</code></td><td>un titre de section</td></tr>
-            <tr><td><code>- élément</code></td><td>une liste à puces</td></tr>
-            <tr><td><code>**important**</code></td><td><strong>important</strong></td></tr>
-            <tr><td><code>[texte](lien)</code></td><td>un lien cliquable</td></tr>
+            <tr><td><code>[Trello](https://trello.com)</code></td><td>un lien cliquable</td></tr>
+            <tr><td><code>![Logo](docs/logo.png)</code></td><td>une image</td></tr>
+            <tr><td><code>`docs/need.md`</code></td><td>un nom de fichier ou une commande</td></tr>
+            <tr><td><code>&gt; Citation</code></td><td>un paragraphe en retrait</td></tr>
+            <tr><td><code>| A | B |</code> puis <code>|---|---|</code></td><td>un tableau</td></tr>
           </table>
-          <p class="petit muet" style="margin-top: 14px;">
-            <strong>Markdown</strong> : format de texte simple avec quelques symboles de mise en forme. GitHub l'affiche joliment.
-            Un fichier Markdown se termine par <code>.md</code>. <a href="https://docs.github.com/fr/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax" target="_blank">Syntaxe de base</a>
-          </p>
         </div>
       </div>
+      <p class="petit muet" style="margin-top: 6px;">Une ligne vide sépare deux paragraphes. Toute la syntaxe : <a href="https://docs.github.com/fr/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax" target="_blank">écriture et mise en forme sur GitHub</a>. L'onglet <strong>Preview</strong> de l'éditeur de GitHub montre le résultat avant d'enregistrer.</p>
     </div>
     <aside class="notes">
       Pas besoin de langage de programmation pour utiliser Git : tout fichier texte se versionne.
-      Le README.md est la page d'accueil du dépôt sur GitHub.
+      Montrer en direct : modifier le README sur github.com (icône crayon), basculer entre Edit et Preview.
+      Erreur fréquente : oublier la ligne vide avant une liste ou un tableau, qui s'affiche alors comme du texte brut.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Le README : la page d'accueil du dépôt</h2>
+    <div class="corps">
+      <div class="colonnes">
+        <div>
+          <p>GitHub l'affiche sous la liste des fichiers : c'est la <strong>première chose</strong> qu'on lit en ouvrant votre dépôt.</p>
+          <p>En une minute, il répond à quatre questions :</p>
+          <ul class="dense">
+            <li><strong>Quoi ?</strong> Le projet en deux phrases</li>
+            <li><strong>Pour qui et pourquoi ?</strong> Le client et son besoin</li>
+            <li><strong>Où en est-on ?</strong> L'état et les liens utiles</li>
+            <li><strong>Qui ?</strong> L'équipe et le rôle de chacun</li>
+          </ul>
+        </div>
+        <div class="carte">
+          <h3>Les sections de votre README</h3>
+          <ol class="dense">
+            <li>Titre et présentation du projet</li>
+            <li>Le client et son besoin</li>
+            <li>L'équipe et les rôles (tableau)</li>
+            <li>Les liens : Trello, projet GitHub</li>
+            <li>Les documents de <code>docs/</code> (liens)</li>
+            <li>L'avancement (cases à cocher)</li>
+            <li>La déclaration d'usage de l'IA</li>
+          </ol>
+        </div>
+      </div>
+      <div class="encadre marine" style="margin-top: 4px;">Un README se lit en diagonale : titres clairs, listes courtes, liens.</div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Un README complet</h2>
+    <div class="corps">
+      <pre class="mini deux" data-titre="README.md" style="margin:0;"><style>.reveal pre.deux code{column-count:2;column-fill:auto;height:318px;font-size:12.5px;column-gap:36px;column-rule:1px solid rgba(127,140,170,.35);font-size:13px;line-height:1.4}</style><code class="language-markdown" data-trim>
+# Grand Prix Hexagone
+
+Application web du tournoi Mario Kart de la rentrée :
+inscriptions, grille des courses et classement en direct.
+
+## Le client et son besoin
+
+Le **bureau des étudiants** veut en finir avec le papier.
+Détails : [docs/need.md](docs/need.md)
+
+## L'équipe
+
+| Membre | Rôle          |
+|--------|---------------|
+| Manon  | Product Owner |
+| Cosmo  | Scrum Master  |
+| Chris  | Developer     |
+
+## Liens
+
+- [Tableau Trello](https://trello.com/b/…)
+- [Projet GitHub](https://github.com/…/projects/1)
+
+## Avancement
+
+- [x] Besoin reformulé et validé
+- [x] Backlog estimé
+- [ ] Sprint 1 terminé
+
+## Usage de l'IA
+
+Le Chat (Mistral AI) a relu `docs/need.md`.
+          </code></pre>
+      <div class="encadre" style="margin-top: 12px;">
+        Un seul <code>#</code>, une section <code>##</code> par question, des <strong>liens</strong> plutôt que des copier-coller.
+      </div>
+    </div>
+    <aside class="notes">
+      Ouvrir ce README sur un dépôt de démonstration pour montrer son rendu sur GitHub.
     </aside>
   </section>
 

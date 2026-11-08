@@ -313,9 +313,66 @@
       <tr><td><code>docs/user-stories.md</code></td><td>Toutes les user stories avec critères d'acceptation, priorité et points.</td></tr>
       <tr><td><code>docs/planning.md</code></td><td>Les deux sprints : capacité, stories retenues, total des points, jalons datés, ce qui reste dans le backlog.</td></tr>
       <tr><td><code>docs/retrospective.md</code></td><td>La rétrospective de l'étape 11.</td></tr>
-      <tr><td><code>README.md</code></td><td>Le projet en quelques lignes, l'équipe et le rôle de chacun, les liens vers le tableau Trello et le projet GitHub, la déclaration d'usage de l'IA.</td></tr>
+      <tr><td><code>README.md</code></td><td>La page d'accueil du dépôt. Elle suit le modèle ci-dessous.</td></tr>
     </table>
     <p>Chaque membre est <strong>auteur d'au moins une pull request</strong> et <strong>relecteur d'au moins une autre</strong>. Des noms de branches clairs, par exemple <code>docs/need</code> ou <code>docs/planning</code>.</p>
+
+    <h3>Le README de l'équipe</h3>
+    <p>Le README est la première chose qu'on lit en ouvrant votre dépôt. Il est évalué à part dans la grille. Il contient, dans cet ordre :</p>
+    <ol>
+      <li>un seul titre <code>#</code> : le nom du projet, suivi de deux phrases de présentation ;</li>
+      <li><code>## Le client et son besoin</code> : le besoin en trois phrases maximum et un lien vers <code>docs/need.md</code> ;</li>
+      <li><code>## L'équipe</code> : un <strong>tableau</strong> Markdown avec chaque membre et son rôle ;</li>
+      <li><code>## Liens</code> : le tableau Trello et le projet GitHub ;</li>
+      <li><code>## Documents</code> : un lien vers chaque fichier de <code>docs/</code> ;</li>
+      <li><code>## Avancement</code> : des <strong>cases à cocher</strong> (<code>- [x]</code> fait, <code>- [ ]</code> à faire) pour les grandes étapes du projet ;</li>
+      <li><code>## Usage de l'IA</code> : quel outil et pour quoi faire. Sinon, « Aucun outil d'IA utilisé ».</li>
+    </ol>
+    <p>Vérifiez le rendu sur github.com : aucun symbole Markdown ne doit apparaître tel quel (un <code>**</code> visible, un tableau affiché en texte brut…).</p>
+
+    <details>
+      <summary>Un modèle de README à adapter</summary>
+      <pre data-titre="README.md"><code class="language-markdown">
+        # Nom du projet
+
+        Deux phrases : ce que fait l'application et pour qui.
+
+        ## Le client et son besoin
+
+        Le besoin du client en trois phrases maximum.
+        Détails : [docs/need.md](docs/need.md)
+
+        ## L'équipe
+
+        | Membre | Rôle          |
+        |--------|---------------|
+        | Prénom | Client        |
+        | Prénom | Product Owner |
+        | Prénom | Scrum Master  |
+
+        ## Liens
+
+        - [Tableau Trello](https://trello.com/b/…)
+        - [Projet GitHub](https://github.com/…/projects/1)
+
+        ## Documents
+
+        - [Besoin reformulé](docs/need.md)
+        - [User stories](docs/user-stories.md)
+        - [Planning des sprints](docs/planning.md)
+        - [Rétrospective](docs/retrospective.md)
+
+        ## Avancement
+
+        - [x] Besoin reformulé et validé par le client
+        - [x] Backlog estimé et planifié
+        - [ ] Rétrospective rédigée
+
+        ## Usage de l'IA
+
+        Outil utilisé, pour quoi faire (ou « Aucun outil d'IA utilisé »).
+      </code></pre>
+    </details>
 
     <details>
       <summary>Le Markdown en 30 secondes</summary>
@@ -332,7 +389,8 @@
 
         Total : 18 points · Jalon : démonstration au client le 11 décembre
       </code></pre>
-      <p><code>#</code> fait un titre, <code>-</code> une puce, <code>**…**</code> du gras, <code>- [ ]</code> une case à cocher. GitHub affiche le résultat mis en forme.</p>
+      <p><code>#</code> fait un titre, <code>-</code> une puce, <code>**…**</code> du gras, <code>- [ ]</code> une case à cocher, <code>[texte](lien)</code> un lien. Laissez une ligne vide avant une liste ou un tableau. GitHub affiche le résultat mis en forme.
+        <a href="https://docs.github.com/fr/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax" target="_blank">Toute la syntaxe</a>.</p>
     </details>
 
     <div class="encadre">
@@ -411,9 +469,10 @@
       <tr><td>Backlog</td><td>10 stories ou plus, bien formées, avec critères d'acceptation et priorité MoSCoW</td><td class="num">2</td></tr>
       <tr><td>Estimation et planification</td><td>Points cohérents, deux sprints de 20 points maximum, Must d'abord, jalons datés</td><td class="num">2</td></tr>
       <tr><td>Tableau Trello</td><td>Listes, cartes complètes, état cohérent avec le reste du projet</td><td class="num">1</td></tr>
-      <tr><td>Suivi sur GitHub</td><td>Issues, milestones, vues Board et Roadmap renseignées</td><td class="num">2</td></tr>
+      <tr><td>Suivi sur GitHub</td><td>Issues, milestones, vues Board et Roadmap renseignées</td><td class="num">1</td></tr>
       <tr><td>Collaboration avec Git</td><td>Une branche et une pull request par document, relues, chacun auteur et relecteur, conflit résolu</td><td class="num">2</td></tr>
-      <tr><td>Rétrospective et README</td><td>Deux actions avec un responsable, rôles, liens et déclaration d'usage de l'IA</td><td class="num">1</td></tr>
+      <tr><td>Rétrospective</td><td>Trois colonnes renseignées, deux actions avec un responsable</td><td class="num">1</td></tr>
+      <tr><td>README</td><td>Les sept sections du modèle, tableau de l'équipe, liens qui fonctionnent, cases d'avancement, Markdown correctement rendu sur GitHub</td><td class="num">1</td></tr>
       <tr><td colspan="3"><strong>Soutenance</strong></td></tr>
       <tr><td>Présentation</td><td>Structure respectée, 5 minutes tenues, chacun prend la parole <span class="muet">(note commune)</span></td><td class="num">4</td></tr>
       <tr><td>Question individuelle</td><td>Réponse complète (4), partielle (2), absente ou fausse (0) <span class="muet">(note individuelle)</span></td><td class="num">4</td></tr>
@@ -431,7 +490,7 @@
       <li>Chaque membre a ouvert au moins une pull request et en a relu au moins une autre.</li>
       <li>Les issues ont un milestone. Les vues Board et Roadmap sont renseignées.</li>
       <li>Le conflit volontaire a été résolu et le README ne contient plus de marqueur.</li>
-      <li>Le README déclare l'usage de l'IA (outils, pour quoi faire) ou indique qu'elle n'a pas été utilisée.</li>
+      <li>Le README suit le modèle : sept sections, tableau de l'équipe, liens qui fonctionnent, déclaration d'usage de l'IA. Son rendu sur GitHub est propre.</li>
       <li>Chaque membre sait expliquer chaque document de l'équipe.</li>
     </ul>
   </section>
