@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projet de groupe – 1GEST</title>
+  <link rel="stylesheet" href="../assets/css/enonce.css">
+  <style>@media print { .defi { break-before: auto; } .defi > h2 { break-after: avoid; } }</style>
+</head>
+<body>
+
+<header class="entete">
+  <div class="panneau"><img src="../assets/charte/logo-hexagone.png" alt="École Hexagone"></div>
+  <div class="titre">
+    <h1>Projet de groupe</h1>
+    <p><span class="code-module">1GEST</span> – Gestion de projet et outils collaboratifs · 12 et 16 novembre 2026</p>
+  </div>
+</header>
+
+<main>
+
+  <h3>Contexte</h3>
+  <p>
+    Votre équipe vient d'être choisie par un client pour réaliser une application. Le client sait ce qu'il veut… à peu près.
+    Son besoin est flou, il oublie des détails importants et il changera peut-être d'avis en cours de route. Comme dans la vraie vie.
+  </p>
+  <p>
+    Votre mission : <strong>comprendre son besoin, le découper, l'estimer, le planifier et suivre le projet</strong> avec les outils
+    d'une vraie équipe. Vous n'écrirez aucune ligne de code. Tout ce que vous produisez, ce sont les documents et les outils qui
+    permettraient à une équipe de développement de démarrer lundi matin.
+  </p>
+
+  <div class="encadre marine">
+    <span class="intitule">Ce projet en bref</span>
+    <ul>
+      <li><strong>Équipes</strong> de 3 ou 4. Le groupe de Clermont-Ferrand travaille ensemble au campus et me rejoint sur Teams.</li>
+      <li><strong>Atelier 1</strong> (jeudi 12 novembre) : cadrage, backlog, estimation et tableau Trello.</li>
+      <li><strong>Atelier 2</strong> (lundi 16 novembre) : le projet passe sur GitHub, avec les documents de l'équipe.</li>
+      <li><strong>Soutenance</strong> de 10 minutes le lundi 16 novembre à partir de 14h45.</li>
+      <li>Le projet compte pour <strong>70 %</strong> de la note du module (livrables sur 12, soutenance sur 8).</li>
+    </ul>
+  </div>
+
+  <div class="encadre">
+    <span class="intitule">Groupe de Clermont-Ferrand</span>
+    <ul>
+      <li>Vous travaillez <strong>ensemble dans la même salle</strong>, comme les équipes de Versailles. Toutes les étapes se font en face à face.</li>
+      <li>Un ordinateur reste connecté à la réunion Teams, caméra allumée, micro coupé quand vous travaillez. Allumez-le pour me parler.</li>
+      <li>Je vous rejoins sur Teams à chaque étape. Pour me montrer votre travail, partagez l'écran de l'ordinateur concerné.</li>
+      <li>Une question ? Écrivez-la dans le chat de la réunion, je réponds dès que possible.</li>
+      <li>Si la connexion coupe, continuez avec cet énoncé (en ligne ou en PDF) et reconnectez-vous dès que possible. Rien n'est perdu.</li>
+    </ul>
+  </div>
+
+  <nav class="sommaire">
+    <a href="#etape-1"><span class="n">Étape 1</span><br>L'équipe et les rôles</a>
+    <a href="#etape-2"><span class="n">Étape 2</span><br>Le besoin du client</a>
+    <a href="#etape-3"><span class="n">Étape 3</span><br>Le backlog</a>
+    <a href="#etape-4"><span class="n">Étape 4</span><br>L'estimation et les sprints</a>
+    <a href="#etape-5"><span class="n">Étape 5</span><br>Le tableau Trello</a>
+    <a href="#etape-6"><span class="n">Étape 6</span><br>Le point d'étape</a>
+    <a href="#entre-deux"><span class="n">Avant le 16</span><br>Travail personnel</a>
+    <a href="#etape-7"><span class="n">Étape 7</span><br>Le dépôt GitHub</a>
+    <a href="#etape-8"><span class="n">Étape 8</span><br>Issues et suivi</a>
+    <a href="#etape-9"><span class="n">Étape 9</span><br>Les documents</a>
+    <a href="#etape-10"><span class="n">Étape 10</span><br>Le conflit</a>
+    <a href="#etape-11"><span class="n">Étape 11</span><br>La rétrospective</a>
+    <a href="#soutenance"><span class="n">Soutenance</span><br>et grille</a>
+  </nav>
+
+  <h2 style="margin-top: 36px;">Atelier 1 – Simuler un projet</h2>
+
+  <!-- ================================================================== -->
+  <section class="defi" id="etape-1">
+    <h2><span class="num">1</span> L'équipe et les rôles</h2>
+    <div class="meta"><span class="etiquette clair">Acteurs · Scrum</span></div>
+
+    <p>Formez votre équipe puis répartissez ces rôles. Chaque rôle est tenu par une seule personne.</p>
+    <table>
+      <tr><th>Rôle</th><th>Ce qu'il fait pendant le projet</th></tr>
+      <tr><td><strong>Client</strong> (MOA)</td><td>Reçoit le cahier des charges et il est le <strong>seul</strong> à le lire. Il exprime le besoin, répond aux questions et valide les livrables. Il joue son personnage jusqu'au bout.</td></tr>
+      <tr><td><strong>Product Owner</strong></td><td>Représente le client dans l'équipe. Il rédige et priorise le backlog. Il a le dernier mot sur les priorités.</td></tr>
+      <tr><td><strong>Scrum Master</strong></td><td>Anime les étapes, surveille le temps et tient le tableau à jour. Il crée le dépôt GitHub de l'équipe.</td></tr>
+      <tr><td><strong>Developer</strong> (équipe de 4)</td><td>Le quatrième membre prépare les documents avec le Product Owner et le Scrum Master.</td></tr>
+    </table>
+    <p>Tout le monde, client compris, rédige une partie des documents de l'atelier 2.</p>
+    <p>Dès que les rôles sont choisis, le client me le signale. Je lui envoie son cahier des charges en privé, dans un message Teams.</p>
+
+    <div class="encadre">
+      <span class="intitule">Pour valider, montrez-moi…</span>
+      <ul>
+        <li>le nom de votre équipe et le rôle de chacun.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section class="defi" id="etape-2">
+    <h2><span class="num">2</span> Le besoin du client</h2>
+    <div class="meta"><span class="etiquette clair">QQOQCCP · Silent Scrum</span></div>
+
+    <p>Vous allez découvrir le besoin avec un jeu en trois manches, le <strong>Silent Scrum</strong>. Il oblige à écouter avant de parler.</p>
+    <ol>
+      <li><strong>Le client parle, l'équipe se tait.</strong> Le client présente son projet avec ses mots, sans lire son cahier des charges.
+        L'équipe écoute et prend des notes, sans poser la moindre question ni réagir.</li>
+      <li><strong>L'équipe pose ses questions.</strong> Elle s'appuie sur le QQOQCCP (Quoi, Qui, Où, Quand, Comment, Combien, Pourquoi).
+        Le client répond <strong>uniquement</strong> à la question posée. Ce qu'on ne lui demande pas, il ne le dit pas.</li>
+      <li><strong>L'équipe reformule.</strong> Le Product Owner résume le besoin en cinq phrases maximum. Le client dit ce qui est juste,
+        ce qui est faux et ce qui manque. On recommence jusqu'à ce qu'il valide.</li>
+    </ol>
+    <p>Notez le résultat : un objectif SMART, les utilisateurs, les livrables attendus, les jalons, les contraintes et ce qui est <strong>hors périmètre</strong>.
+      Il deviendra le document <code>docs/need.md</code> à l'atelier 2.</p>
+
+    <details>
+      <summary>Des idées de questions à poser au client</summary>
+      <ul>
+        <li>Qui utilisera l'application ? Sur quel appareil ? Où ?</li>
+        <li>Pour quelle date en avez-vous besoin ? Pourquoi cette date ?</li>
+        <li>Quelle fonctionnalité est indispensable dès le premier jour ?</li>
+        <li>Qu'est-ce qui se passe aujourd'hui, sans l'application ?</li>
+        <li>Y a-t-il quelque chose que vous ne voulez surtout pas ?</li>
+      </ul>
+    </details>
+
+    <div class="encadre">
+      <span class="intitule">Pour valider, montrez-moi…</span>
+      <ul>
+        <li>la reformulation du besoin validée par votre client ;</li>
+        <li>au moins un élément hors périmètre.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section class="defi" id="etape-3">
+    <h2><span class="num">3</span> Le backlog</h2>
+    <div class="meta"><span class="etiquette clair">User stories · MoSCoW</span></div>
+
+    <p>Le Product Owner rédige le backlog avec l'équipe. Il contient <strong>au moins 10 user stories</strong>, chacune avec :</p>
+    <ul>
+      <li>la phrase « En tant que…, je veux… afin de… » ;</li>
+      <li>au moins deux <strong>critères d'acceptation</strong> ;</li>
+      <li>une priorité <strong>MoSCoW</strong> (Must, Should, Could, Won't), validée par le client.</li>
+    </ul>
+    <p>Exemple d'une story bien écrite pour un autre projet :</p>
+    <div class="encadre marine">
+      <strong>En tant qu'</strong>arbitre du tournoi, <strong>je veux</strong> saisir le résultat d'une course depuis mon téléphone
+      <strong>afin de</strong> mettre à jour le classement sans attendre la fin du tournoi.
+      <ul>
+        <li>Je choisis la course puis la position de chaque joueur.</li>
+        <li>Le classement est mis à jour en moins de 10 secondes.</li>
+      </ul>
+      <p><em>Priorité : Must</em></p>
+    </div>
+
+    <div class="encadre">
+      <span class="intitule">Pour valider, montrez-moi…</span>
+      <ul>
+        <li>10 user stories ou plus, bien formées, avec leurs critères d'acceptation ;</li>
+        <li>une priorité pour chacune et au moins une story en Won't.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section class="defi" id="etape-4">
+    <h2><span class="num">4</span> L'estimation et les sprints</h2>
+    <div class="meta"><span class="etiquette clair">Planning Poker · jalons</span></div>
+
+    <p>Estimez chaque story en <strong>points</strong> avec un Planning Poker. Le client n'estime pas : il répond aux questions.</p>
+    <ol>
+      <li>Le Product Owner lit la story.</li>
+      <li>Chacun choisit en secret une valeur parmi <strong>1, 2, 3, 5, 8, 13</strong> ou « ? ».</li>
+      <li>Au signal, tout le monde révèle sa valeur en même temps. En salle, écrivez-la sur un papier retourné.
+        Vous pouvez aussi utiliser les doigts de la main (1, 2, 3, 5) ou une application de Planning Poker.</li>
+      <li>Les deux valeurs extrêmes s'expliquent. On revote jusqu'à se mettre d'accord.</li>
+    </ol>
+    <p>Une story estimée à 13 est trop grosse : découpez-la en plusieurs stories plus petites.</p>
+    <p>Planifiez ensuite <strong>deux sprints de deux semaines</strong>, avec une capacité de <strong>20 points par sprint</strong> :</p>
+    <ul>
+      <li>le sprint 1 ne contient que des Must ;</li>
+      <li>chaque fin de sprint est un <strong>jalon</strong> daté, avec ce que le client pourra voir ce jour-là ;</li>
+      <li>ce qui ne tient pas dans les deux sprints reste dans le backlog. Dites-le au client !</li>
+    </ul>
+    <p>Prenez le lundi 30 novembre 2026 comme date de début du sprint 1.</p>
+
+    <div class="encadre">
+      <span class="intitule">Pour valider, montrez-moi…</span>
+      <ul>
+        <li>une estimation en points pour chaque story ;</li>
+        <li>le contenu des deux sprints (20 points maximum chacun) ;</li>
+        <li>les deux jalons datés.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section class="defi" id="etape-5">
+    <h2><span class="num">5</span> Le tableau Trello</h2>
+    <div class="meta"><span class="etiquette clair">Kanban · Trello</span></div>
+
+    <ol>
+      <li>Le Scrum Master crée un compte <a href="https://trello.com/signup" target="_blank">Trello</a> (avec la double authentification) puis un tableau au nom de l'équipe.</li>
+      <li>Il invite tous les membres et moi-même : <strong>chris.chevalier@ecole-hexagone.com</strong>.</li>
+      <li>Créez cinq listes : <strong>Backlog</strong>, <strong>Sprint 1 – À faire</strong>, <strong>En cours</strong>, <strong>En revue</strong>, <strong>Terminé</strong>.</li>
+      <li>Une carte par user story, avec :
+        <ul>
+          <li>le titre court de la story et la phrase complète dans la description ;</li>
+          <li>une étiquette de priorité (Must, Should, Could, Won't) et les points dans le titre, par exemple « Saisie des scores (5) » ;</li>
+          <li>une checklist avec les critères d'acceptation.</li>
+        </ul>
+      </li>
+      <li>Rangez les stories du sprint 1 dans « Sprint 1 – À faire ». Les autres restent dans « Backlog ».</li>
+    </ol>
+    <p class="muet">Trello appartient à l'entreprise australienne Atlassian. Des alternatives libres et auto-hébergeables existent, comme <a href="https://kanboard.org/" target="_blank">Kanboard</a>.</p>
+
+    <div class="encadre">
+      <span class="intitule">Pour valider, montrez-moi…</span>
+      <ul>
+        <li>le tableau partagé avec toute l'équipe et avec moi ;</li>
+        <li>une carte complète : description, étiquette, points, checklist.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section class="defi" id="etape-6">
+    <h2><span class="num">6</span> Le point d'étape</h2>
+    <div class="meta"><span class="etiquette clair">Reporting</span></div>
+
+    <p>À <strong>15h30</strong>, chaque équipe présente son avancement en <strong>3 minutes</strong>, en partageant son tableau Trello. Ce point n'est pas noté.</p>
+    <ul>
+      <li>Le projet en une phrase et la météo du projet : ☀️ dans les temps, ⛅ sous surveillance, ⛈️ en difficulté.</li>
+      <li>Ce qui est fait.</li>
+      <li>Ce qui reste à faire.</li>
+      <li>Une difficulté rencontrée et ce que vous attendez de moi ou du client.</li>
+    </ul>
+  </section>
+
+  <!-- ================================================================== -->
+  <section class="defi" id="entre-deux">
+    <h2><span class="num">⌂</span> Avant le lundi 16 novembre</h2>
+    <div class="meta"><span class="etiquette clair">Travail personnel</span></div>
+
+    <p>Chacun, seul, si ce n'est pas déjà fait en séance :</p>
+    <ul class="checklist">
+      <li>Créer un compte <a href="https://github.com/signup" target="_blank">GitHub</a> avec un nom d'utilisateur professionnel (par exemple <code>prenom-nom</code>).</li>
+      <li>Activer la <a href="https://docs.github.com/fr/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication" target="_blank">double authentification</a> sur GitHub.</li>
+      <li>Installer <a href="https://desktop.github.com/download/" target="_blank">GitHub Desktop</a> et s'y connecter avec son compte.</li>
+      <li>Installer un éditeur de texte, par exemple <a href="https://code.visualstudio.com/" target="_blank">Visual Studio Code</a> ou sa version entièrement libre <a href="https://vscodium.com/" target="_blank">VSCodium</a>.</li>
+      <li>Avec son équipe : terminer le backlog et le tableau Trello.</li>
+    </ul>
+  </section>
+
+  <h2 style="margin-top: 36px;">Atelier 2 – Collaborer sur GitHub</h2>
+
+  <!-- ================================================================== -->
+  <section class="defi" id="etape-7">
+    <h2><span class="num">7</span> Le dépôt GitHub de l'équipe</h2>
+    <div class="meta"><span class="etiquette clair">Dépôt · collaborateurs</span></div>
+
+    <ol>
+      <li>Le Scrum Master crée sur GitHub un dépôt <strong>privé</strong> nommé <code>1gest-nom-de-l-equipe</code>, avec un fichier <code>README.md</code>.</li>
+      <li>Dans <strong>Settings → Collaborators</strong>, il invite tous les membres et <strong>Chris-CHEVALIER</strong>.</li>
+      <li>Chaque membre accepte l'invitation puis clone le dépôt avec GitHub Desktop.</li>
+      <li>Le Scrum Master crée le dossier <code>docs/</code> avec un premier fichier vide, puis fait le premier commit et le pousse. Les autres récupèrent ce commit.</li>
+    </ol>
+    <p class="muet">Ne mettez jamais dans le dépôt un mot de passe, une clé d'accès ou une donnée personnelle (téléphone, adresse). Même privé, un dépôt peut être partagé ou fuiter.</p>
+
+    <div class="encadre">
+      <span class="intitule">Pour valider, montrez-moi…</span>
+      <ul>
+        <li>le dépôt privé, avec toute l'équipe et moi comme collaborateurs ;</li>
+        <li>le dépôt cloné sur la machine de chaque membre.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section class="defi" id="etape-8">
+    <h2><span class="num">8</span> Les issues et le suivi du projet</h2>
+    <div class="meta"><span class="etiquette clair">Issues · Milestones · GitHub Projects</span></div>
+
+    <p>Votre backlog quitte Trello pour GitHub. Les tâches vivent alors au même endroit que les documents de l'équipe.</p>
+    <ol>
+      <li>Créez deux <strong>milestones</strong> (jalons) : « Sprint 1 » et « Sprint 2 », avec leur date de fin.</li>
+      <li>Créez une <strong>issue par user story</strong> des deux sprints : la phrase de la story, ses critères d'acceptation sous forme de cases à cocher, son milestone, un label de priorité et ses points dans le titre.</li>
+      <li>Créez un <strong>projet</strong> GitHub (onglet <strong>Projects</strong>) relié au dépôt et ajoutez-y toutes les issues.</li>
+      <li>Vue <strong>Board</strong> : les colonnes Todo, In Progress, Done jouent le rôle de votre tableau Kanban.</li>
+      <li>Vue <strong>Roadmap</strong> : ajoutez une date de début et une date de fin à chaque issue. Vous obtenez votre diagramme de Gantt.</li>
+    </ol>
+    <p>Ajoutez enfin <strong>une issue par document</strong> de l'étape 9, assignée à son auteur. Ce sont les tâches d'aujourd'hui.</p>
+
+    <div class="encadre">
+      <span class="intitule">Pour valider, montrez-moi…</span>
+      <ul>
+        <li>les issues des deux sprints, chacune avec son milestone ;</li>
+        <li>la vue Board et la vue Roadmap de votre projet GitHub.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section class="defi" id="etape-9">
+    <h2><span class="num">9</span> Les documents de l'équipe</h2>
+    <div class="meta"><span class="etiquette clair">Markdown · branches · pull requests</span></div>
+
+    <p>Chaque document est écrit en <strong>Markdown</strong> par un auteur, sur <strong>sa propre branche</strong>, puis proposé dans une <strong>pull request</strong>.
+      Un autre membre la relit et l'approuve avant la fusion dans <code>main</code>. Mettez <code>Closes #numéro</code> dans la description pour fermer l'issue du document automatiquement.</p>
+    <table>
+      <tr><th>Fichier</th><th>Contenu</th></tr>
+      <tr><td><code>docs/need.md</code></td><td>Le besoin reformulé : objectif SMART, QQOQCCP, utilisateurs, livrables, jalons, contraintes et hors périmètre.</td></tr>
+      <tr><td><code>docs/user-stories.md</code></td><td>Toutes les user stories avec critères d'acceptation, priorité et points.</td></tr>
+      <tr><td><code>docs/planning.md</code></td><td>Les deux sprints : capacité, stories retenues, total des points, jalons datés, ce qui reste dans le backlog.</td></tr>
+      <tr><td><code>docs/retrospective.md</code></td><td>La rétrospective de l'étape 11.</td></tr>
+      <tr><td><code>README.md</code></td><td>Le projet en quelques lignes, l'équipe et le rôle de chacun, les liens vers le tableau Trello et le projet GitHub, la déclaration d'usage de l'IA.</td></tr>
+    </table>
+    <p>Chaque membre est <strong>auteur d'au moins une pull request</strong> et <strong>relecteur d'au moins une autre</strong>. Des noms de branches clairs, par exemple <code>docs/need</code> ou <code>docs/planning</code>.</p>
+
+    <details>
+      <summary>Le Markdown en 30 secondes</summary>
+      <pre data-titre="docs/planning.md"><code class="language-markdown">
+        # Planning
+
+        ## Sprint 1 (30 novembre → 11 décembre)
+
+        Capacité : **20 points**
+
+        - [ ] Inscription des joueurs (5)
+        - [ ] Grille des courses (8)
+        - [ ] Connexion des arbitres (5)
+
+        Total : 18 points · Jalon : démonstration au client le 11 décembre
+      </code></pre>
+      <p><code>#</code> fait un titre, <code>-</code> une puce, <code>**…**</code> du gras, <code>- [ ]</code> une case à cocher. GitHub affiche le résultat mis en forme.</p>
+    </details>
+
+    <div class="encadre">
+      <span class="intitule">Pour valider, montrez-moi…</span>
+      <ul>
+        <li>les cinq documents dans <code>main</code> ;</li>
+        <li>une pull request relue et approuvée par un autre membre, qui ferme son issue.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section class="defi" id="etape-10">
+    <h2><span class="num">10</span> Le conflit volontaire</h2>
+    <div class="meta"><span class="etiquette clair">Conflit · résolution</span></div>
+
+    <p>Un conflit arrive tôt ou tard. Mieux vaut le provoquer une première fois, à froid.</p>
+    <ol>
+      <li>Deux membres créent chacun une branche à partir de <code>main</code>, à jour.</li>
+      <li>Chacun modifie <strong>la même ligne</strong> du <code>README.md</code> : le slogan de l'équipe, chacun le sien.</li>
+      <li>Chacun ouvre sa pull request. La première est fusionnée.</li>
+      <li>La seconde affiche alors un conflit. Résolvez-le ensemble : gardez un slogan, l'autre ou un mélange des deux, puis supprimez les marqueurs <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code> et <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>.</li>
+      <li>Fusionnez la seconde pull request.</li>
+    </ol>
+
+    <div class="encadre">
+      <span class="intitule">Pour valider, montrez-moi…</span>
+      <ul>
+        <li>la pull request qui a eu un conflit, résolu puis fusionné ;</li>
+        <li>le README final, sans marqueur de conflit.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section class="defi" id="etape-11">
+    <h2><span class="num">11</span> La rétrospective</h2>
+    <div class="meta"><span class="etiquette clair">Amélioration continue</span></div>
+
+    <p>Prenez 15 minutes pour regarder votre façon de travailler pendant ces deux journées, pas votre produit.
+      Le Scrum Master anime. Chacun donne au moins une idée par colonne.</p>
+    <table>
+      <tr><th>▶ Commencer</th><th>■ Arrêter</th><th>↻ Continuer</th></tr>
+      <tr><td>Ce qu'on devrait se mettre à faire</td><td>Ce qui nous a fait perdre du temps</td><td>Ce qui a bien marché</td></tr>
+    </table>
+    <p>Terminez par <strong>deux actions concrètes</strong>, chacune avec un responsable, que vous appliqueriez au prochain sprint.
+      Le tout va dans <code>docs/retrospective.md</code>, par une pull request comme les autres.</p>
+  </section>
+
+  <!-- ================================================================== -->
+  <section class="defi" id="soutenance">
+    <h2><span class="num">★</span> La soutenance et la grille</h2>
+    <div class="meta"><span class="etiquette clair">Lundi 16 novembre · 14h45</span></div>
+
+    <p>10 minutes par équipe. Le groupe de Clermont-Ferrand présente sur Teams, caméra allumée, en partageant son écran. Chaque membre se place face à la caméra quand il prend la parole.</p>
+    <ol>
+      <li><strong>5 minutes de présentation</strong>, chaque membre prend la parole :
+        <ul>
+          <li>le client présente son besoin initial en une phrase ;</li>
+          <li>l'équipe montre le besoin reformulé et ce qui est hors périmètre ;</li>
+          <li>le backlog, les priorités et une estimation qui a fait débat ;</li>
+          <li>les deux sprints et les jalons, sur la vue Roadmap ;</li>
+          <li>une pull request relue et le conflit résolu ;</li>
+          <li>les deux actions de la rétrospective.</li>
+        </ul>
+      </li>
+      <li><strong>Une question à chaque membre</strong>, sans IA ni notes. Elle porte sur une notion du cours appliquée à votre projet ou sur un document de l'équipe.</li>
+    </ol>
+    <p>Seul ce qui est poussé dans le dépôt avant votre passage est évalué. Je relis le tableau Trello et le dépôt après les soutenances.</p>
+
+    <h3>Grille d'évaluation (sur 20)</h3>
+    <table>
+      <tr><th>Critère</th><th>Ce que je vérifie</th><th class="num">Points</th></tr>
+      <tr><td colspan="3"><strong>Livrables du groupe</strong></td></tr>
+      <tr><td>Besoin reformulé</td><td><code>docs/need.md</code> : objectif SMART, QQOQCCP, livrables, jalons, contraintes, hors périmètre</td><td class="num">2</td></tr>
+      <tr><td>Backlog</td><td>10 stories ou plus, bien formées, avec critères d'acceptation et priorité MoSCoW</td><td class="num">2</td></tr>
+      <tr><td>Estimation et planification</td><td>Points cohérents, deux sprints de 20 points maximum, Must d'abord, jalons datés</td><td class="num">2</td></tr>
+      <tr><td>Tableau Trello</td><td>Listes, cartes complètes, état cohérent avec le reste du projet</td><td class="num">1</td></tr>
+      <tr><td>Suivi sur GitHub</td><td>Issues, milestones, vues Board et Roadmap renseignées</td><td class="num">2</td></tr>
+      <tr><td>Collaboration avec Git</td><td>Une branche et une pull request par document, relues, chacun auteur et relecteur, conflit résolu</td><td class="num">2</td></tr>
+      <tr><td>Rétrospective et README</td><td>Deux actions avec un responsable, rôles, liens et déclaration d'usage de l'IA</td><td class="num">1</td></tr>
+      <tr><td colspan="3"><strong>Soutenance</strong></td></tr>
+      <tr><td>Présentation</td><td>Structure respectée, 5 minutes tenues, chacun prend la parole <span class="muet">(note commune)</span></td><td class="num">4</td></tr>
+      <tr><td>Question individuelle</td><td>Réponse complète (4), partielle (2), absente ou fausse (0) <span class="muet">(note individuelle)</span></td><td class="num">4</td></tr>
+      <tr><td colspan="2"><strong>Total</strong></td><td class="num"><strong>20</strong></td></tr>
+    </table>
+    <p class="muet">Un membre qui n'a contribué à aucun document (aucune pull request ni relecture) peut voir sa note de livrables réduite.</p>
+  </section>
+
+  <!-- ================================================================== -->
+  <section class="defi" id="auto-evaluation">
+    <h2><span class="num">✓</span> Avant la soutenance</h2>
+    <ul class="checklist">
+      <li>Le tableau Trello est à jour et je suis invité.</li>
+      <li>Le dépôt privé contient les cinq documents dans <code>main</code> et je suis collaborateur.</li>
+      <li>Chaque membre a ouvert au moins une pull request et en a relu au moins une autre.</li>
+      <li>Les issues ont un milestone. Les vues Board et Roadmap sont renseignées.</li>
+      <li>Le conflit volontaire a été résolu et le README ne contient plus de marqueur.</li>
+      <li>Le README déclare l'usage de l'IA (outils, pour quoi faire) ou indique qu'elle n'a pas été utilisée.</li>
+      <li>Chaque membre sait expliquer chaque document de l'équipe.</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="pied">Chris CHEVALIER · 1GEST – Gestion de projet et outils collaboratifs · École Hexagone</footer>
+
+<script src="../assets/vendor/reveal/plugin/highlight/highlight.js"></script>
+<script src="../assets/js/enonce.js"></script>
+</body>
+</html>

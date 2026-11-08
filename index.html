@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>1GEST – Gestion de projet et outils collaboratifs</title>
+  <link rel="stylesheet" href="assets/fonts/outfit.css">
+  <style>
+    :root { --marine: #1E427C; --ambre: #F7B120; --jaune: #FFD301; --gris-clair: #EEF2F8; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Outfit", Arial, "Helvetica Neue", Helvetica, sans-serif; color: var(--marine); background: #fff; }
+    header { background: var(--marine); color: #fff; display: flex; align-items: stretch; min-height: 180px; }
+    header .panneau { background: var(--ambre); display: flex; align-items: center; justify-content: center; padding: 24px 32px; flex: 0 0 auto; }
+    header .panneau img { width: 240px; max-width: 60vw; display: block; }
+    header .titre { padding: 28px 32px; display: flex; flex-direction: column; justify-content: center; }
+    header h1 { margin: 0 0 8px; font-size: clamp(28px, 5vw, 42px); }
+    header p { margin: 0; font-size: 18px; }
+    header .code { color: var(--jaune); font-weight: 700; }
+    main { max-width: 960px; margin: 0 auto; padding: 32px 16px 48px; }
+    h2 { font-size: 24px; margin: 32px 0 14px; padding-left: 14px; border-left: 6px solid var(--ambre); }
+    ul { list-style: none; margin: 0; padding: 0; }
+    li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px;
+         padding: 14px 18px; border-bottom: 1px solid #D5DDEA; }
+    li:nth-child(even) { background: var(--gris-clair); }
+    li .nom { font-weight: 700; font-size: 18px; }
+    li .liens a { display: inline-block; margin-left: 8px; padding: 6px 14px; border-radius: 4px; font-weight: 700;
+                  font-size: 14px; text-decoration: none; background: var(--marine); color: #fff; }
+    li .liens a.pdf { background: var(--ambre); color: var(--marine); }
+    li .info { font-size: 15px; }
+    li.a-venir .nom { opacity: .5; }
+    li.a-venir .liens { font-size: 14px; opacity: .6; }
+    footer { text-align: center; font-size: 14px; opacity: .7; padding: 24px 16px; }
+    @media (max-width: 640px) { header { flex-direction: column; } li .liens a { margin: 0 8px 0 0; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="panneau"><img src="assets/charte/logo-hexagone.png" alt="École Hexagone"></div>
+    <div class="titre">
+      <h1>Gestion de projet et outils collaboratifs</h1>
+      <p><span class="code">1GEST</span> · Bachelor 1re année · Versailles et Clermont-Ferrand · 2026-2027</p>
+    </div>
+  </header>
+  <main>
+    <h2>Supports de cours</h2>
+    <ul>
+      <li>
+        <span class="nom">0 – Organisation du module</span>
+        <span class="liens"><a href="cours/0-organisation-du-module.html">Présentation</a><a class="pdf" href="pdf/0-organisation-du-module.pdf">PDF</a></span>
+      </li>
+      <li>
+        <span class="nom">1 – Gérer un projet</span>
+        <span class="liens"><a href="cours/1-gerer-un-projet.html">Présentation</a><a class="pdf" href="pdf/1-gerer-un-projet.pdf">PDF</a></span>
+      </li>
+      <li>
+        <span class="nom">2 – Git et GitHub</span>
+        <span class="liens"><a href="cours/2-git-et-github.html">Présentation</a><a class="pdf" href="pdf/2-git-et-github.pdf">PDF</a></span>
+      </li>
+    </ul>
+
+    <h2>Projet de groupe</h2>
+    <ul>
+      <li>
+        <span class="nom">Énoncé, livrables et grille d'évaluation</span>
+        <span class="liens"><a href="projet/projet.html">Énoncé</a><a class="pdf" href="pdf/projet.pdf">PDF</a></span>
+      </li>
+      <li>
+        <span class="nom">Soutenances de groupe</span>
+        <span class="info">Lundi 16 novembre à partir de 14h45 · 10 min par équipe</span>
+      </li>
+    </ul>
+
+    <h2>Examen écrit</h2>
+    <ul>
+      <li>
+        <span class="nom">Lundi 16 novembre, de 15h30 à 16h</span>
+        <span class="info">30 min · 10 questions ouvertes · sans documentation ni IA</span>
+      </li>
+    </ul>
+  </main>
+  <footer>Chris CHEVALIER · <a href="mailto:chris.chevalier@ecole-hexagone.com" style="color: inherit;">chris.chevalier@ecole-hexagone.com</a></footer>
+</body>
+</html>

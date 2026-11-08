@@ -1,0 +1,785 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Git et GitHub – 1GEST</title>
+  <link rel="stylesheet" href="../assets/vendor/reveal/dist/reset.css">
+  <link rel="stylesheet" href="../assets/vendor/reveal/dist/reveal.css">
+  <link rel="stylesheet" href="../assets/css/hexagone.css">
+</head>
+<body data-pied="1GEST – Gestion de projet et outils collaboratifs · Git et GitHub">
+<div class="reveal">
+<div class="slides">
+
+  <!-- ================================================================== -->
+  <section data-layout="titre">
+    <h1>Git et GitHub</h1>
+    <div class="sous-titre">
+      <span class="code-module">1GEST</span> – Gestion de projet et outils collaboratifs<br>
+      Chris CHEVALIER
+    </div>
+    <aside class="notes">
+      Vérifier dès l'ouverture que chacun a créé son compte GitHub (avec double authentification) et installé GitHub Desktop.
+      Sinon, le faire pendant la pause : l'atelier de l'après-midi en dépend.
+      Clermont : vérifier le son et le partage d'écran sur Teams avant de commencer.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section data-layout="sommaire">
+    <h1>Sommaire</h1>
+    <ol>
+      <li>Pourquoi versionner ?</li>
+      <li>Les notions de Git</li>
+      <li>GitHub Desktop pas à pas</li>
+      <li>Travailler en équipe sur GitHub</li>
+      <li>Souveraineté numérique</li>
+    </ol>
+  </section>
+
+  <!-- ================================================================== -->
+  <section data-layout="section">
+    <div class="numero">#1</div>
+    <h2>Pourquoi versionner ?</h2>
+    <div class="sous-titre">Git et GitHub</div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Vous connaissez déjà ce dossier</h2>
+    <div class="corps">
+      <div class="colonnes">
+        <div>
+          <pre data-titre="Dossier « Projet »"><code class="language-plaintext" data-trim>
+rapport.docx
+rapport-v2.docx
+rapport-v2-relu-par-Manon.docx
+rapport-final.docx
+rapport-final-v3.docx
+rapport-final-v3-VRAIMENT-final.docx
+          </code></pre>
+        </div>
+        <div>
+          <ul>
+            <li>Quelle est la <strong>bonne</strong> version ?</li>
+            <li>Qu'est-ce qui a changé entre deux versions ?</li>
+            <li>Qui a modifié quoi ? Quand ? Pourquoi ?</li>
+            <li>Comment travailler à trois sur le même fichier <strong>sans écraser</strong> le travail des autres ?</li>
+          </ul>
+        </div>
+      </div>
+      <div class="encadre" style="margin-top: 18px;">
+        Le <strong>versionnement</strong> répond à toutes ces questions. Il enregistre chaque étape d'un projet avec son auteur, sa date et la raison du changement.
+      </div>
+    </div>
+    <aside class="notes">
+      Demander qui a déjà vécu ce dossier (exposé de groupe, rapport de stage…). Tout le monde lève la main en général.
+      Insister sur le travail à plusieurs : c'est là que les copies de fichiers deviennent ingérables.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Git et GitHub : deux choses différentes</h2>
+    <div class="corps">
+      <div class="colonnes">
+        <div class="carte">
+          <h3>Git · le logiciel</h3>
+          <ul class="dense">
+            <li>Installé <strong>sur votre ordinateur</strong></li>
+            <li>Enregistre l'historique de votre projet</li>
+            <li><strong>Libre et gratuit</strong>, créé en 2005 par Linus Torvalds</li>
+            <li><strong>Distribué</strong> : chaque membre possède une copie complète du projet et de son historique</li>
+          </ul>
+        </div>
+        <div class="carte ambre">
+          <h3>GitHub · l'hébergeur</h3>
+          <ul class="dense">
+            <li>Un <strong>site web</strong> qui stocke une copie du projet en ligne</li>
+            <li>Partage le projet avec l'équipe</li>
+            <li>Ajoute des outils de travail en équipe : tickets, relecture, tableaux</li>
+            <li>Appartient à <strong>Microsoft</strong> depuis 2018</li>
+          </ul>
+        </div>
+      </div>
+      <p class="petit muet" style="margin-top: 18px;">
+        <strong>Logiciel libre</strong> : logiciel dont le code est public et que chacun peut utiliser, étudier, modifier et redistribuer.
+        Linus Torvalds est aussi le créateur du noyau Linux. D'autres hébergeurs existent : <a href="https://about.gitlab.com/" target="_blank">GitLab</a>, <a href="https://codeberg.org/" target="_blank">Codeberg</a>…
+      </p>
+    </div>
+    <aside class="notes">
+      Analogie possible : Git est l'appareil photo, GitHub est l'album partagé en ligne.
+      On peut utiliser Git sans GitHub, mais pas l'inverse.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section data-layout="section">
+    <div class="numero">#2</div>
+    <h2>Les notions de Git</h2>
+    <div class="sous-titre">Git et GitHub</div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Dépôt local et dépôt distant</h2>
+    <div class="corps">
+      <div class="colonnes c3">
+        <div class="carte">
+          <h3>Dépôt local</h3>
+          Le dossier du projet <strong>sur votre ordinateur</strong>, avec tout son historique. Vous y travaillez, même sans Internet.
+        </div>
+        <div class="carte pleine" style="text-align: center;">
+          <h3>Synchronisation</h3>
+          <p><strong>Push</strong> ⟶ envoyer vos étapes en ligne</p>
+          <p><strong>Pull</strong> ⟵ récupérer celles de l'équipe</p>
+        </div>
+        <div class="carte">
+          <h3>Dépôt distant</h3>
+          La copie du projet <strong>sur GitHub</strong>. C'est la référence commune que toute l'équipe partage.
+        </div>
+      </div>
+      <p class="petit muet" style="margin-top: 22px;">
+        <strong>Dépôt</strong> (<em>repository</em>, souvent abrégé en <em>repo</em>) : dossier de projet suivi par Git.
+        Le dépôt distant s'appelle par défaut <code>origin</code>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Le commit : une photo de votre projet</h2>
+    <div class="corps">
+      <div class="colonnes">
+        <div>
+          <ul>
+            <li>Un <strong>commit</strong> est une photo de votre projet à un instant donné, accompagnée d'un message qui résume ce qui a changé</li>
+            <li>Chaque commit garde son <strong>auteur</strong>, sa <strong>date</strong> et un <strong>identifiant unique</strong></li>
+            <li>On peut revenir à n'importe quelle photo de l'historique</li>
+          </ul>
+        </div>
+        <div>
+          <table>
+            <tr><th>Message</th><th class="num">Avis</th></tr>
+            <tr><td>« modifs »</td><td class="num"><span class="ko">✗</span></td></tr>
+            <tr><td>« update README.md »</td><td class="num"><span class="ko">✗</span></td></tr>
+            <tr><td>« Ajout des user stories du sprint 1 »</td><td class="num"><span class="ok">✓</span></td></tr>
+            <tr><td>« Correction de l'estimation de la recherche »</td><td class="num"><span class="ok">✓</span></td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="encadre marine" style="margin-top: 18px;">
+        Un bon message dit <strong>la nature du changement</strong>. En lisant seulement l'historique, on doit comprendre ce qui s'est passé sans ouvrir le commit.
+      </div>
+    </div>
+    <aside class="notes">
+      Faire deviner pourquoi « update README.md » est insuffisant : on sait quel fichier, pas ce qui a changé ni pourquoi.
+      Règle pratique : un commit = une étape cohérente. Ni « tout le travail de la journée », ni une virgule.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Le cycle de travail</h2>
+    <div class="corps">
+      <div class="frise">
+        <div class="etape">
+          <div class="date">1 · Pull</div>
+          <ul>
+            <li>Récupérer le travail de l'équipe</li>
+            <li><strong>Toujours avant de commencer</strong></li>
+          </ul>
+        </div>
+        <div class="etape">
+          <div class="date">2 · Modifier</div>
+          <ul>
+            <li>Écrire, corriger, ajouter des fichiers</li>
+            <li>Enregistrer dans l'éditeur</li>
+          </ul>
+        </div>
+        <div class="etape">
+          <div class="date">3 · Commit</div>
+          <ul>
+            <li>Choisir les fichiers</li>
+            <li>Écrire un message clair</li>
+            <li>Valider l'étape</li>
+          </ul>
+        </div>
+        <div class="etape marine">
+          <div class="date">4 · Push</div>
+          <ul>
+            <li>Envoyer vos commits sur GitHub</li>
+            <li>L'équipe peut les récupérer</li>
+          </ul>
+        </div>
+      </div>
+      <div class="encadre" style="margin-top: 26px;">
+        Un commit reste <strong>sur votre ordinateur</strong> tant que vous ne l'avez pas poussé. Pour l'équipe, un travail non poussé n'existe pas.
+      </div>
+    </div>
+    <aside class="notes">
+      Faire répéter le cycle à voix haute : Pull, modifier, Commit, Push.
+      Erreur classique en équipe : oublier le Pull, puis découvrir un conflit au moment du Push.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Les branches</h2>
+    <div class="corps">
+      <div class="colonnes">
+        <div>
+          <ul>
+            <li>Une <strong>branche</strong> est une ligne de travail indépendante. Vous y avancez sans perturber les autres</li>
+            <li>La branche principale s'appelle <code>main</code>. Elle contient la version <strong>validée</strong> du projet</li>
+            <li>Une branche par tâche, avec un nom clair : <code>user-stories</code>, <code>fix-readme-links</code></li>
+          </ul>
+        </div>
+        <div>
+          <svg viewBox="0 0 460 200" width="100%" role="img" aria-label="Une branche part de main puis y revient par une fusion">
+            <line x1="20" y1="60" x2="440" y2="60" stroke="#1E427C" stroke-width="5"/>
+            <path d="M120 60 C 160 60, 160 150, 200 150 L 320 150 C 360 150, 360 60, 400 60" fill="none" stroke="#F7B120" stroke-width="5"/>
+            <circle cx="60" cy="60" r="12" fill="#1E427C"/>
+            <circle cx="120" cy="60" r="12" fill="#1E427C"/>
+            <circle cx="240" cy="150" r="12" fill="#F7B120"/>
+            <circle cx="300" cy="150" r="12" fill="#F7B120"/>
+            <circle cx="400" cy="60" r="14" fill="#1E427C" stroke="#F7B120" stroke-width="4"/>
+            <text x="20" y="35" font-family="Outfit, Arial" font-size="20" fill="#1E427C" font-weight="700">main</text>
+            <text x="200" y="190" font-family="Outfit, Arial" font-size="20" fill="#1E427C" font-weight="700">user-stories</text>
+            <text x="360" y="35" font-family="Outfit, Arial" font-size="20" fill="#1E427C">fusion</text>
+          </svg>
+        </div>
+      </div>
+      <div class="encadre marine" style="margin-top: 14px;">
+        Quand la tâche est terminée, on <strong>fusionne</strong> la branche dans <code>main</code>. On parle de <strong>merge</strong>.
+      </div>
+    </div>
+    <aside class="notes">
+      Chaque rond est un commit. Manon travaille sur user-stories pendant que Cosmo corrige le README sur une autre branche :
+      personne ne gêne personne. Main ne reçoit que du travail terminé.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>La pull request : faire relire avant de fusionner</h2>
+    <div class="corps">
+      <div class="colonnes">
+        <div>
+          <ul>
+            <li>Une <strong>pull request</strong> (PR) est une demande de fusion d'une branche dans <code>main</code>, faite sur GitHub</li>
+            <li>Un coéquipier <strong>relit</strong> les changements, commente puis approuve</li>
+            <li>La fusion se fait sur GitHub avec le bouton <strong>Merge pull request</strong></li>
+          </ul>
+        </div>
+        <div class="carte">
+          <h3>Exemple</h3>
+          <p>Manon ouvre la PR « Ajout des user stories du sprint 1 ».</p>
+          <p>Cosmo la relit et signale une story sans critère d'acceptation. Manon corrige sur sa branche : la PR se met à jour toute seule.</p>
+          <p>Cosmo approuve, Chris fusionne.</p>
+        </div>
+      </div>
+      <p class="petit muet" style="margin-top: 16px;">
+        Sur GitLab, on parle de <em>merge request</em> : c'est la même chose. <a href="https://docs.github.com/fr/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests" target="_blank">Documentation GitHub sur les pull requests</a>
+      </p>
+    </div>
+    <aside class="notes">
+      La PR est le cœur du travail d'équipe : elle oblige à relire et laisse une trace de la discussion.
+      Cet après-midi, chaque livrable passe par une PR relue par un autre membre.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Les conflits</h2>
+    <div class="corps">
+      <div class="colonnes">
+        <div>
+          <ul>
+            <li>Un <strong>conflit</strong> apparaît quand deux personnes modifient <strong>la même ligne</strong> du même fichier</li>
+            <li>Git ne peut pas deviner la bonne version. Il vous demande de choisir</li>
+            <li>Ce n'est <strong>pas une erreur</strong> : c'est une décision à prendre, à deux de préférence</li>
+          </ul>
+        </div>
+        <div>
+          <pre data-titre="README.md (en conflit)"><code class="language-plaintext" data-trim>
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+# Appli de covoiturage étudiant
+=======
+# CoVoit'Campus
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; titre-projet
+          </code></pre>
+        </div>
+      </div>
+      <div class="encadre marine" style="margin-top: 14px;">
+        <strong>Résoudre</strong> : garder une version, l'autre ou un mélange des deux, <strong>supprimer les lignes de marqueurs</strong> (<code>&lt;&lt;&lt;</code>, <code>===</code>, <code>&gt;&gt;&gt;</code>), enregistrer puis faire un commit.
+      </div>
+    </div>
+    <aside class="notes">
+      En haut, la version de la branche où l'on se trouve (HEAD). En bas, celle de la branche qu'on fusionne.
+      GitHub Desktop détecte le conflit et propose d'ouvrir le fichier dans l'éditeur. On en provoquera un volontairement cet après-midi.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Markdown : ce que vous écrirez dans le dépôt</h2>
+    <div class="corps">
+      <div class="colonnes">
+        <div>
+          <pre data-titre="docs/user-stories.md"><code class="language-markdown" data-trim>
+# User stories
+
+## Sprint 1
+
+- **En tant qu'**étudiant,
+  **je veux** publier un trajet
+  **afin de** partager les frais.
+- **En tant que** conducteur,
+  **je veux** accepter un passager.
+
+Voir le [besoin](besoin.md).
+          </code></pre>
+        </div>
+        <div>
+          <table>
+            <tr><th>J'écris</th><th>J'obtiens</th></tr>
+            <tr><td><code># Titre</code></td><td>un grand titre</td></tr>
+            <tr><td><code>## Sous-titre</code></td><td>un titre de section</td></tr>
+            <tr><td><code>- élément</code></td><td>une liste à puces</td></tr>
+            <tr><td><code>**important**</code></td><td><strong>important</strong></td></tr>
+            <tr><td><code>[texte](lien)</code></td><td>un lien cliquable</td></tr>
+          </table>
+          <p class="petit muet" style="margin-top: 14px;">
+            <strong>Markdown</strong> : format de texte simple avec quelques symboles de mise en forme. GitHub l'affiche joliment.
+            Un fichier Markdown se termine par <code>.md</code>. <a href="https://docs.github.com/fr/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax" target="_blank">Syntaxe de base</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <aside class="notes">
+      Pas besoin de langage de programmation pour utiliser Git : tout fichier texte se versionne.
+      Le README.md est la page d'accueil du dépôt sur GitHub.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section data-layout="section">
+    <div class="numero">#3</div>
+    <h2>GitHub Desktop pas à pas</h2>
+    <div class="sous-titre">Git et GitHub</div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Installer et se connecter</h2>
+    <div class="corps">
+      <div class="colonnes">
+        <div>
+          <ol>
+            <li>Créez un compte sur <a href="https://github.com/signup" target="_blank">github.com</a> et activez la <a href="https://docs.github.com/fr/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication" target="_blank"><strong>double authentification</strong></a></li>
+            <li>Téléchargez <a href="https://desktop.github.com/download/" target="_blank"><strong>GitHub Desktop</strong></a> (Windows ou macOS) et installez-le</li>
+            <li>Au premier lancement, cliquez sur <strong>Sign in to GitHub.com</strong>. Le navigateur s'ouvre pour autoriser l'application</li>
+            <li>Vérifiez votre nom et votre adresse e-mail. Ils signeront chacun de vos commits</li>
+          </ol>
+        </div>
+        <div>
+          <div class="encadre marine">
+            <p><strong>GitHub Desktop</strong> est une application qui utilise Git sans taper de commande. Chaque bouton lance une commande Git à votre place.</p>
+          </div>
+          <p class="petit muet" style="margin-top: 16px;">
+            <strong>Double authentification</strong> (2FA) : en plus du mot de passe, un code temporaire donné par une application du téléphone.
+            Un mot de passe volé ne suffit plus pour entrer dans votre compte.
+          </p>
+        </div>
+      </div>
+    </div>
+    <aside class="notes">
+      GitHub impose désormais la double authentification à tous ceux qui contribuent du code. Autant l'activer dès la création du compte.
+      Linux : GitHub Desktop n'existe pas officiellement. Utiliser l'interface de github.com ou une version communautaire.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Récupérer le dépôt de l'équipe : cloner</h2>
+    <div class="corps">
+      <ol>
+        <li>Un membre crée le dépôt sur github.com (<strong>New repository</strong>) en cochant <strong>Add a README file</strong></li>
+        <li>Il invite les autres membres (diapo suivante)</li>
+        <li>Chacun ouvre GitHub Desktop : <strong>File → Clone repository</strong></li>
+        <li>Choisissez le dépôt dans la liste, puis le dossier où le ranger sur votre ordinateur</li>
+        <li>Cliquez sur <strong>Clone</strong>. Le projet et tout son historique arrivent sur votre machine</li>
+      </ol>
+      <p class="petit muet" style="margin-top: 18px;">
+        <strong>Cloner</strong> : télécharger une copie complète d'un dépôt distant, historique compris. On ne le fait qu'une fois par machine.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Inviter les membres de l'équipe</h2>
+    <div class="corps">
+      <div class="colonnes">
+        <div>
+          <ol>
+            <li>Sur github.com, ouvrez le dépôt</li>
+            <li><strong>Settings → Collaborators</strong></li>
+            <li><strong>Add people</strong>, puis saisissez le nom d'utilisateur de chaque membre</li>
+            <li>Chaque membre accepte l'invitation reçue par e-mail</li>
+          </ol>
+        </div>
+        <div>
+          <div class="encadre">
+            Invitez aussi <strong>Chris-CHEVALIER</strong>. Je suis votre projet depuis le dépôt et c'est lui que je note.
+          </div>
+        </div>
+      </div>
+      <p class="petit muet" style="margin-top: 18px;">
+        <a href="https://docs.github.com/fr/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-access-to-your-personal-repositories/inviting-collaborators-to-a-personal-repository" target="_blank">Documentation GitHub : inviter des collaborateurs</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Faire un commit puis le pousser</h2>
+    <div class="corps">
+      <div class="colonnes">
+        <div>
+          <ol>
+            <li>Modifiez un fichier puis enregistrez-le</li>
+            <li>Dans GitHub Desktop, l'onglet <strong>Changes</strong> liste les fichiers modifiés. Les lignes ajoutées sont en vert, les lignes supprimées en rouge</li>
+            <li>Cochez les fichiers à inclure</li>
+            <li>Remplissez <strong>Summary</strong> (le message) et, si besoin, <strong>Description</strong></li>
+            <li>Cliquez sur <strong>Commit to main</strong> (le nom de la branche courante)</li>
+            <li>Cliquez sur <strong>Push origin</strong></li>
+          </ol>
+        </div>
+        <div>
+          <div class="encadre marine">
+            <strong>Avant de commencer</strong> : cliquez sur <strong>Fetch origin</strong>. S'il y a du nouveau, le bouton devient <strong>Pull origin</strong> : cliquez dessus.
+          </div>
+          <p class="petit muet" style="margin-top: 16px;">
+            L'onglet <strong>History</strong> affiche tous les commits de l'équipe, avec leur auteur, leur date et leurs changements.
+          </p>
+        </div>
+      </div>
+    </div>
+    <aside class="notes">
+      Montrer en direct sur un dépôt de démonstration : modifier le README, commit, push, puis afficher le résultat sur github.com.
+      Fetch interroge GitHub sans rien modifier ; Pull récupère réellement les changements.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Créer une branche puis ouvrir une pull request</h2>
+    <div class="corps">
+      <div class="colonnes">
+        <div>
+          <ol>
+            <li><strong>Current Branch → New Branch</strong>, un nom clair, puis <strong>Create Branch</strong></li>
+            <li>Faites vos commits sur cette branche</li>
+            <li><strong>Publish branch</strong> l'envoie sur GitHub</li>
+            <li><strong>Preview Pull Request</strong>, vérifiez <strong>base: main</strong> puis <strong>Create Pull Request</strong></li>
+            <li>Dans le navigateur, donnez un titre clair puis <strong>Create pull request</strong></li>
+          </ol>
+        </div>
+        <div>
+          <div class="carte">
+            <h3>Sur github.com</h3>
+            <ul class="dense">
+              <li>Un coéquipier ouvre l'onglet <strong>Files changed</strong> puis <strong>Review changes</strong></li>
+              <li>Il commente ou approuve (<strong>Approve</strong>)</li>
+              <li>On fusionne avec <strong>Merge pull request</strong></li>
+              <li>Chacun revient sur <code>main</code> et fait un <strong>Pull</strong></li>
+            </ul>
+          </div>
+          <p class="petit muet" style="margin-top: 14px;">
+            <a href="https://docs.github.com/fr/desktop/working-with-your-remote-repository-on-github-or-github-enterprise/creating-an-issue-or-pull-request-from-github-desktop" target="_blank">Documentation : créer une pull request</a>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Résoudre un conflit dans GitHub Desktop</h2>
+    <div class="corps">
+      <ol>
+        <li>GitHub Desktop signale les fichiers en conflit (par exemple en mettant à jour votre branche avec <code>main</code>)</li>
+        <li>Ouvrez chaque fichier dans votre éditeur (<strong>Open in Visual Studio Code</strong> ou un autre éditeur de texte)</li>
+        <li>Choisissez le texte à garder puis <strong>supprimez les marqueurs</strong> <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code> et <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code></li>
+        <li>Enregistrez. GitHub Desktop indique que le conflit est résolu</li>
+        <li>Validez la fusion par un commit puis poussez</li>
+      </ol>
+      <div class="encadre marine" style="margin-top: 18px;">
+        <strong>Pour en avoir moins</strong> : faites un Pull avant de travailler, des commits fréquents, des branches courtes et prévenez l'équipe quand vous modifiez un fichier commun.
+      </div>
+    </div>
+    <aside class="notes">
+      Un conflit peut aussi se résoudre directement sur github.com avec le bouton Resolve conflicts d'une pull request.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Ce que GitHub Desktop fait à votre place</h2>
+    <div class="corps">
+      <table>
+        <tr><th>Dans GitHub Desktop</th><th>Commande Git</th><th>Rôle</th></tr>
+        <tr><td>Clone repository</td><td><code>git clone &lt;adresse&gt;</code></td><td>copier un dépôt distant</td></tr>
+        <tr><td>Cocher les fichiers</td><td><code>git add &lt;fichier&gt;</code></td><td>préparer le commit</td></tr>
+        <tr><td>Commit to main</td><td><code>git commit -m "message"</code></td><td>enregistrer une étape</td></tr>
+        <tr><td>Push origin</td><td><code>git push</code></td><td>envoyer sur GitHub</td></tr>
+        <tr><td>Pull origin</td><td><code>git pull</code></td><td>récupérer le travail de l'équipe</td></tr>
+        <tr><td>New Branch</td><td><code>git switch -c &lt;nom&gt;</code></td><td>créer une branche et s'y placer</td></tr>
+        <tr><td>Merge into current branch</td><td><code>git merge &lt;branche&gt;</code></td><td>fusionner une branche</td></tr>
+      </table>
+      <p class="petit muet" style="margin-top: 14px;">
+        À titre d'information : ces commandes se tapent dans un terminal. Vous n'en avez pas besoin dans ce module, mais vous les croiserez partout.
+        <a href="https://git-scm.com/book/fr/v2" target="_blank">Le livre Pro Git (en français)</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section data-layout="section">
+    <div class="numero">#4</div>
+    <h2>Travailler en équipe sur GitHub</h2>
+    <div class="sous-titre">Git et GitHub</div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Les issues : une tâche, un ticket</h2>
+    <div class="corps">
+      <div class="colonnes">
+        <div>
+          <ul>
+            <li>Une <strong>issue</strong> est un ticket qui décrit une tâche, une idée ou un problème</li>
+            <li>Titre, description, personne assignée (<strong>Assignees</strong>) et étiquettes (<strong>Labels</strong>)</li>
+            <li>Onglet <strong>Issues → New issue</strong></li>
+            <li><code>Closes #3</code> dans une PR ferme l'issue n° 3</li>
+          </ul>
+        </div>
+        <div class="carte">
+          <h3>#3 · Rédiger les user stories du sprint 1</h3>
+          <p><span class="etiquette">documentation</span> <span class="etiquette ambre">sprint 1</span></p>
+          <p>Assignée à <strong>Manon</strong> · Estimation : 3 points</p>
+          <p>Fermée par la PR « Ajout des user stories du sprint 1 »</p>
+        </div>
+      </div>
+      <div class="encadre marine" style="margin-top: 16px;">
+        Chaque carte de votre backlog devient une issue. Le suivi du projet et le travail réel vivent au même endroit.
+      </div>
+    </div>
+    <aside class="notes">
+      Le numéro (#3) est attribué par GitHub. Closes #3 ferme l'issue automatiquement quand la PR est fusionnée dans main.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>GitHub Projects : le tableau de bord du projet</h2>
+    <div class="corps">
+      <div class="colonnes">
+        <div class="carte">
+          <h3>Vue Board · le Kanban</h3>
+          <ul class="dense">
+            <li>Les issues sont des cartes rangées en colonnes : <em>Todo</em>, <em>In Progress</em>, <em>Done</em></li>
+            <li>On déplace une carte quand la tâche avance</li>
+            <li>Vision instantanée : qui fait quoi, qu'est-ce qui bloque ?</li>
+          </ul>
+        </div>
+        <div class="carte ambre">
+          <h3>Vue Roadmap · le Gantt</h3>
+          <ul class="dense">
+            <li>Les mêmes issues sur une frise du temps</li>
+            <li><strong>Date fields</strong> : une date de début (<em>Start date</em>) et une date de fin (<em>Target date</em>)</li>
+            <li><strong>Zoom</strong> : Month, Quarter ou Year</li>
+          </ul>
+        </div>
+      </div>
+      <ul style="margin-top: 18px;">
+        <li>Créer : onglet <strong>Projects → New project</strong>, puis relier le projet au dépôt. Une nouvelle vue s'ajoute avec <strong>New view</strong></li>
+        <li><strong>Milestones</strong> (jalons) : dans <strong>Issues → Milestones</strong>, une échéance qui regroupe des issues. La Roadmap peut les afficher (<strong>Markers</strong>)</li>
+      </ul>
+      <p class="petit muet" style="margin-top: 10px;">
+        <a href="https://docs.github.com/fr/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects" target="_blank">Documentation GitHub Projects</a> ·
+        <a href="https://docs.github.com/fr/issues/planning-and-tracking-with-projects/customizing-views-in-your-project/customizing-the-roadmap-layout" target="_blank">la vue Roadmap</a>
+      </p>
+    </div>
+    <aside class="notes">
+      Même information, deux regards : le Board pour le quotidien, la Roadmap pour l'échéance.
+      La Roadmap remplace ici le diagramme de Gantt sans rien installer de plus.
+      Montrer en direct un projet de démonstration avec les deux vues.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Les règles d'une équipe qui travaille bien</h2>
+    <div class="corps">
+      <div class="colonnes">
+        <div>
+          <ul>
+            <li><strong>Pull</strong> avant de commencer, <strong>push</strong> avant de partir</li>
+            <li>Une issue, une branche, une pull request</li>
+            <li>Des commits fréquents aux messages clairs</li>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li>Personne ne fusionne sa propre PR sans relecture</li>
+            <li><code>main</code> contient toujours une version propre</li>
+            <li>Le tableau reflète la réalité : on déplace ses cartes</li>
+          </ul>
+        </div>
+      </div>
+      <div class="encadre" style="margin-top: 18px;">
+        Ces règles valent aussi pour le code. Vous les appliquerez telles quelles dans vos projets de programmation.
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section data-layout="section">
+    <div class="numero">#5</div>
+    <h2>Souveraineté numérique</h2>
+    <div class="sous-titre">Git et GitHub</div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Où vivent vos données ?</h2>
+    <div class="corps">
+      <div class="colonnes">
+        <div>
+          <ul class="dense">
+            <li>GitHub appartient à <strong>Microsoft</strong>, une entreprise américaine</li>
+            <li>Le <strong>Cloud Act</strong> permet à la justice américaine d'exiger les données stockées par une entreprise américaine, même sur des serveurs situés en Europe</li>
+          </ul>
+          <p class="petit muet">
+            <strong>Souveraineté numérique</strong> : capacité à choisir et à maîtriser ses outils et ses données, sans dépendre d'un seul acteur.
+            Le <em>Cloud Act</em> est une loi américaine de 2018.
+          </p>
+        </div>
+        <div>
+          <div class="carte">
+            <h3>Des alternatives ouvertes</h3>
+            <ul class="dense">
+              <li><a href="https://about.gitlab.com/" target="_blank"><strong>GitLab</strong></a> : libre dans sa version communautaire et <strong>auto-hébergeable</strong> sur les serveurs de l'école ou de l'entreprise</li>
+              <li><a href="https://forgejo.org/" target="_blank"><strong>Forgejo</strong></a> : forge libre et légère, utilisée par <a href="https://codeberg.org/" target="_blank"><strong>Codeberg</strong></a>, association à but non lucratif basée en Allemagne</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="encadre marine" style="margin-top: 14px;">
+        <strong>Git reste libre.</strong> Votre dépôt et tout son historique se déplacent d'un hébergeur à l'autre sans rien perdre. Changer d'outil est un choix, pas une impasse.
+      </div>
+    </div>
+    <aside class="notes">
+      J'utilise GitHub dans ce module parce que c'est l'outil que je maîtrise le mieux et le plus répandu en entreprise.
+      Ce n'est pas un choix neutre : la souveraineté numérique est une valeur de l'école. Demander qui connaît une alternative.
+      Un compte peut aussi être suspendu selon les sanctions décidées aux États-Unis.
+      Exemple concret : l'administration française et de nombreuses universités hébergent leur propre GitLab.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Les bons réflexes de sécurité</h2>
+    <div class="corps">
+      <div class="colonnes">
+        <div class="carte">
+          <h3>Votre compte</h3>
+          <ul class="dense">
+            <li><strong>Double authentification</strong> obligatoire</li>
+            <li>Un mot de passe unique, rangé dans un gestionnaire de mots de passe</li>
+            <li>N'invitez que les membres du projet</li>
+          </ul>
+        </div>
+        <div class="carte ambre">
+          <h3>Votre dépôt</h3>
+          <ul class="dense">
+            <li><strong>Jamais de mot de passe</strong>, de clé d'accès ni de jeton dans un fichier versionné</li>
+            <li><strong>Jamais de données personnelles</strong> (adresses, téléphones, notes…)</li>
+            <li>Dépôt <strong>privé</strong> par défaut</li>
+          </ul>
+        </div>
+      </div>
+      <div class="encadre" style="margin-top: 18px;">
+        Supprimer un fichier ne suffit pas : <strong>il reste dans l'historique</strong>. Un secret poussé une fois est un secret à changer.
+      </div>
+    </div>
+    <aside class="notes">
+      Des robots parcourent en permanence les dépôts publics à la recherche de clés et de mots de passe oubliés.
+      L'historique est justement la force de Git : il garde tout, y compris les erreurs.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Ce que vous faites cet après-midi</h2>
+    <div class="corps">
+      <div class="frise">
+        <div class="etape">
+          <div class="date">Le dépôt</div>
+          <ul>
+            <li>Créé par un membre</li>
+            <li>Équipe et Chris-CHEVALIER invités</li>
+            <li>Cloné par chacun</li>
+          </ul>
+        </div>
+        <div class="etape">
+          <div class="date">Les issues</div>
+          <ul>
+            <li>Le backlog Trello devient des issues</li>
+            <li>GitHub Projects : Board et Roadmap</li>
+          </ul>
+        </div>
+        <div class="etape">
+          <div class="date">Les livrables</div>
+          <ul>
+            <li>Une branche et une PR par livrable</li>
+            <li>Relue par un autre membre</li>
+          </ul>
+        </div>
+        <div class="etape marine">
+          <div class="date">Le conflit</div>
+          <ul>
+            <li>Provoqué volontairement</li>
+            <li>Résolu à deux</li>
+          </ul>
+        </div>
+      </div>
+      <div class="encadre marine" style="margin-top: 26px;">
+        Votre dépôt est un livrable noté. Il montre comment l'équipe s'est organisée.
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section data-layout="titre">
+    <h1>Des questions ?</h1>
+    <div class="sous-titre">
+      Chris CHEVALIER<br>
+      chris.chevalier@ecole-hexagone.com
+    </div>
+  </section>
+
+</div>
+</div>
+
+<script src="../assets/vendor/reveal/dist/reveal.js"></script>
+<script src="../assets/vendor/reveal/plugin/highlight/highlight.js"></script>
+<script src="../assets/vendor/reveal/plugin/notes/notes.js"></script>
+<script src="../assets/js/hexagone.js"></script>
+</body>
+</html>

@@ -1,0 +1,851 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gérer un projet – 1GEST</title>
+  <link rel="stylesheet" href="../assets/vendor/reveal/dist/reset.css">
+  <link rel="stylesheet" href="../assets/vendor/reveal/dist/reveal.css">
+  <link rel="stylesheet" href="../assets/css/hexagone.css">
+  <style>
+    /* Schémas du cours, construits en HTML */
+    .reveal .chaine { display: flex; align-items: stretch; gap: 0; margin: 10px 0; }
+    .reveal .chaine .bloc { flex: 1; background: #EEF2F8; border-top: 4px solid #1E427C; padding: 10px 12px; font-size: .62em; line-height: 1.3; }
+    .reveal .chaine .bloc strong { display: block; font-size: 1.15em; margin-bottom: 4px; }
+    .reveal .chaine .bloc.ambre { border-top-color: #F7B120; background: #FFF6E0; }
+    .reveal .chaine .fleche { flex: 0 0 26px; display: flex; align-items: center; justify-content: center; color: #F7B120; font-weight: 700; font-size: .9em; }
+    .reveal .cascade { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin: 12px 0 0; align-items: start; }
+    .reveal .cascade div { background: #1E427C; color: #fff; padding: 8px 10px; font-size: .58em; font-weight: 600; border-radius: 3px; }
+    .reveal .cascade div:nth-child(1) { margin-top: 0; }
+    .reveal .cascade div:nth-child(2) { margin-top: 34px; }
+    .reveal .cascade div:nth-child(3) { margin-top: 68px; }
+    .reveal .cascade div:nth-child(4) { margin-top: 102px; }
+    .reveal .cascade div:nth-child(5) { margin-top: 136px; }
+    .reveal .cycle-v { display: grid; grid-template-columns: 1fr 1fr; column-gap: 70px; row-gap: 8px; margin: 6px auto 0; max-width: 760px; position: relative; }
+    .reveal .cycle-v div { padding: 7px 12px; font-size: .56em; border-radius: 3px; }
+    .reveal .cycle-v .g { background: #1E427C; color: #fff; }
+    .reveal .cycle-v .d { background: #F7B120; color: #1E427C; font-weight: 600; }
+    .reveal .cycle-v .g1 { margin-right: 0; } .reveal .cycle-v .g2 { margin-left: 40px; } .reveal .cycle-v .g3 { margin-left: 80px; }
+    .reveal .cycle-v .d1 { margin-left: 0; } .reveal .cycle-v .d2 { margin-right: 40px; } .reveal .cycle-v .d3 { margin-right: 80px; }
+    .reveal .cycle-v .bas { grid-column: 1 / span 2; justify-self: center; background: #EEF2F8; color: #1E427C; font-weight: 700; width: 46%; text-align: center; }
+    .reveal .gantt { width: 100%; border-collapse: collapse; font-size: .55em; }
+    .reveal .gantt td, .reveal .gantt th { padding: 5px 4px; border: none; }
+    .reveal .gantt th { background: #1E427C; color: #fff; font-weight: 600; text-align: center; }
+    .reveal .gantt td:first-child { width: 34%; text-align: left; }
+    .reveal .gantt .b { background: #1E427C; }
+    .reveal .gantt .a { background: #F7B120; }
+    .reveal .gantt .j { text-align: center; color: #F7B120; font-size: 1.4em; line-height: 1; }
+    .reveal .kanban { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 8px; }
+    .reveal .kanban .col { background: #EEF2F8; border-radius: 6px; padding: 8px; min-height: 230px; }
+    .reveal .kanban .col h4 { margin: 0 0 8px; font-size: .55em; text-transform: none; color: #1E427C; }
+    .reveal .kanban .ticket { background: #fff; border-left: 4px solid #1E427C; border-radius: 4px; padding: 6px 8px; margin-bottom: 7px; font-size: .48em; line-height: 1.3; box-shadow: 0 1px 2px rgba(0,0,0,.12); }
+    .reveal .kanban .ticket.ambre { border-left-color: #F7B120; }
+    .reveal .kanban .ticket .pts { float: right; background: #1E427C; color: #fff; border-radius: 9px; padding: 0 6px; font-size: .9em; }
+    .reveal .scrum { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+    .reveal .scrum .boite { background: #EEF2F8; border-top: 4px solid #1E427C; padding: 8px 10px; font-size: .52em; text-align: center; flex: 1; }
+    .reveal .scrum .boite.sprint { flex: 1.6; background: #1E427C; color: #fff; border-top-color: #F7B120; }
+    .reveal .scrum .boite.sprint .petit-cercle { display: inline-block; margin-top: 6px; background: #F7B120; color: #1E427C; border-radius: 12px; padding: 2px 10px; font-weight: 700; }
+    .reveal .scrum .fl { color: #F7B120; font-weight: 700; font-size: .8em; }
+    .reveal .cartes-poker { display: flex; gap: 10px; margin: 8px 0 4px; }
+    .reveal .cartes-poker span { width: 54px; height: 76px; border: 3px solid #1E427C; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .8em; color: #1E427C; background: #fff; }
+    .reveal .cartes-poker span.q { border-color: #F7B120; color: #F7B120; }
+    .reveal .meteo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .reveal .meteo div { border-radius: 6px; padding: 12px 14px; font-size: .66em; }
+    .reveal .story { background: #FFF6E0; border-left: 6px solid #F7B120; padding: 12px 16px; font-size: .72em; line-height: 1.45; }
+  </style>
+</head>
+<body data-pied="1GEST – Gestion de projet et outils collaboratifs · Gérer un projet">
+<div class="reveal">
+<div class="slides">
+
+  <!-- ================================================================== -->
+  <section data-layout="titre">
+    <h1>Gérer un projet</h1>
+    <div class="sous-titre">
+      <span class="code-module">1GEST</span> – Gestion de projet et outils collaboratifs<br>
+      Chris CHEVALIER
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section data-layout="sommaire">
+    <h1>Sommaire</h1>
+    <ol>
+      <li>Qu'est-ce qu'un projet ?</li>
+      <li>Cadrer, planifier, suivre</li>
+      <li>Les méthodes de gestion de projet</li>
+      <li>Scrum et Kanban en pratique</li>
+    </ol>
+  </section>
+
+  <!-- ================================================================== -->
+  <section data-layout="section">
+    <div class="numero">#1</div>
+    <h2>Qu'est-ce qu'un projet ?</h2>
+    <div class="sous-titre">Gérer un projet</div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Un exemple pour tout le cours</h2>
+    <div class="corps">
+      <div class="colonnes">
+        <div>
+          <p>Le bureau des étudiants organise un <strong>tournoi Mario Kart</strong> pour la rentrée. Il me demande une application web pour :</p>
+          <ul>
+            <li>inscrire les joueurs ;</li>
+            <li>afficher la grille des courses ;</li>
+            <li>saisir les scores et le classement en direct.</li>
+          </ul>
+        </div>
+        <div class="carte ambre">
+          <h3>Ce que je sais au départ</h3>
+          <ul class="dense">
+            <li>Le tournoi a lieu dans <strong>6 semaines</strong></li>
+            <li>Nous sommes <strong>trois</strong> : Chris, Manon et Cosmo</li>
+            <li>Le bureau des étudiants n'a <strong>pas de budget</strong></li>
+            <li>Le reste… il va falloir le demander</li>
+          </ul>
+        </div>
+      </div>
+      <div class="encadre" style="margin-top: 18px;">
+        Est-ce un projet ? Qu'est-ce qui le distingue de votre travail habituel ?
+      </div>
+    </div>
+    <aside class="notes">
+      Exemple réel : la grille du tournoi de la rentrée 2026 a été publiée sur GitHub Pages. Faire répondre la salle et Clermont avant la diapo suivante.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Définition</h2>
+    <div class="corps">
+      <p>Un <strong>projet</strong> est un ensemble d'actions menées pour répondre à un besoin, avec :</p>
+      <div class="colonnes c3" style="margin-top: 10px;">
+        <div class="carte"><h3>Un objectif</h3>Un résultat précis à atteindre, attendu par quelqu'un</div>
+        <div class="carte"><h3>Un début et une fin</h3>Une date de livraison connue dès le départ</div>
+        <div class="carte"><h3>Des ressources limitées</h3>Du temps, des personnes, un budget</div>
+      </div>
+      <div class="encadre marine" style="margin-top: 22px;">
+        Un projet est <strong>unique</strong>. Répondre aux e-mails du support tous les jours est une <strong>activité récurrente</strong>, pas un projet.
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Objectifs, livrables et jalons</h2>
+    <div class="corps">
+      <table>
+        <tr><th style="width: 18%;">Notion</th><th>Définition</th><th style="width: 36%;">Pour le tournoi</th></tr>
+        <tr><td><strong>Objectif</strong></td><td>Ce que le projet doit permettre, mesurable et daté</td><td>Inscrire 64 joueurs avant le 1er octobre</td></tr>
+        <tr><td><strong>Livrable</strong></td><td>Un résultat concret remis au client : logiciel, document, maquette…</td><td>L'application en ligne, son mode d'emploi</td></tr>
+        <tr><td><strong>Jalon</strong></td><td>Une date clé où l'on vérifie qu'une étape est terminée</td><td>Maquettes validées le 15 septembre</td></tr>
+      </table>
+      <div class="encadre" style="margin-top: 20px;">
+        Un bon objectif est <strong>SMART</strong> : spécifique, mesurable, atteignable, réaliste et temporellement défini. « Faire une super appli » n'est pas un objectif.
+      </div>
+    </div>
+    <aside class="notes">
+      Faire reformuler « une super appli » en objectif SMART par la salle. Un jalon n'a pas de durée : c'est un point de passage, souvent représenté par un losange.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Le triangle d'or</h2>
+    <div class="corps">
+      <div class="colonnes">
+        <div style="display: flex; justify-content: center; align-items: center;">
+          <svg viewBox="0 0 320 270" width="340" aria-label="Triangle reliant qualité, coût et délai">
+            <polygon points="160,20 300,250 20,250" fill="#EEF2F8" stroke="#1E427C" stroke-width="4"/>
+            <circle cx="160" cy="20" r="14" fill="#F7B120"/><circle cx="300" cy="250" r="14" fill="#F7B120"/><circle cx="20" cy="250" r="14" fill="#F7B120"/>
+            <text x="160" y="150" text-anchor="middle" font-family="Outfit, Arial" font-size="20" font-weight="700" fill="#1E427C">Projet</text>
+            <text x="160" y="72" text-anchor="middle" font-family="Outfit, Arial" font-size="17" font-weight="700" fill="#1E427C">Qualité</text>
+            <text x="248" y="236" text-anchor="middle" font-family="Outfit, Arial" font-size="17" font-weight="700" fill="#1E427C">Délai</text>
+            <text x="74" y="236" text-anchor="middle" font-family="Outfit, Arial" font-size="17" font-weight="700" fill="#1E427C">Coût</text>
+          </svg>
+        </div>
+        <div>
+          <ul>
+            <li><strong>Qualité</strong> : le périmètre et le niveau d'exigence</li>
+            <li><strong>Coût</strong> : le budget et les personnes mobilisées</li>
+            <li><strong>Délai</strong> : la date de livraison</li>
+          </ul>
+          <div class="encadre marine" style="margin-top: 14px;">
+            Si l'un bouge, les autres bougent. Le client veut plus de fonctionnalités sans décaler la date ? Il faut plus de monde… ou renoncer à autre chose.
+          </div>
+        </div>
+      </div>
+    </div>
+    <aside class="notes">
+      Pour le tournoi, le coût et le délai sont figés (pas de budget, date du tournoi). La seule variable est donc le périmètre : on fera moins mais bien.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Les acteurs d'un projet</h2>
+    <div class="corps">
+      <div class="colonnes c3">
+        <div class="carte ambre">
+          <h3>Le client · MOA</h3>
+          La <strong>maîtrise d'ouvrage</strong> exprime le besoin, valide les livrables et paie. Ici, le bureau des étudiants.
+        </div>
+        <div class="carte">
+          <h3>L'équipe · MOE</h3>
+          La <strong>maîtrise d'œuvre</strong> réalise le projet : chef de projet, développeurs, designers, testeurs. Ici, Chris, Manon et Cosmo.
+        </div>
+        <div class="carte">
+          <h3>Les utilisateurs</h3>
+          Ceux qui utiliseront le résultat. Ce ne sont pas toujours les clients ! Ici, les joueurs et les arbitres.
+        </div>
+      </div>
+      <div class="encadre" style="margin-top: 22px;">
+        Le <strong>chef de projet</strong> fait le lien entre tous : il planifie, coordonne l'équipe, anime les réunions et rend compte au client.
+      </div>
+      <p class="petit muet">MOA et MOE sont des sigles du bâtiment : le maître d'ouvrage commande la maison, le maître d'œuvre la construit.</p>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Chacun voit le projet à sa façon</h2>
+    <div class="corps">
+      <table>
+        <tr><th>Qui</th><th>Ce qu'il a en tête quand il dit « une appli pour le tournoi »</th></tr>
+        <tr><td><strong>Le bureau des étudiants</strong></td><td>Un beau site aux couleurs de l'école, avec les photos de l'an dernier</td></tr>
+        <tr><td><strong>Les arbitres</strong></td><td>Saisir un score en deux clics sur leur téléphone, entre deux courses</td></tr>
+        <tr><td><strong>Les joueurs</strong></td><td>Savoir quand ils jouent et contre qui</td></tr>
+        <tr><td><strong>Cosmo, développeur</strong></td><td>Tester enfin le dernier framework à la mode</td></tr>
+      </table>
+      <div class="encadre marine" style="margin-top: 20px;">
+        Le premier travail d'une équipe est d'<strong>écouter</strong> puis de <strong>reformuler</strong> le besoin, jusqu'à ce que tout le monde parle du même projet.
+      </div>
+    </div>
+    <aside class="notes">
+      Évoquer le célèbre dessin de la balançoire (« comment le client l'a expliqué, comment le chef de projet l'a compris… »), que les étudiants peuvent chercher en ligne.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section data-layout="section">
+    <div class="numero">#2</div>
+    <h2>Cadrer, planifier, suivre</h2>
+    <div class="sous-titre">Gérer un projet</div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Le cycle de vie d'un projet</h2>
+    <div class="corps">
+      <div class="chaine">
+        <div class="bloc ambre"><strong>Cadrage</strong>Comprendre le besoin, fixer le périmètre, estimer, planifier</div>
+        <div class="fleche">→</div>
+        <div class="bloc"><strong>Conception</strong>Maquettes, choix techniques</div>
+        <div class="fleche">→</div>
+        <div class="bloc"><strong>Réalisation</strong>Développement des fonctionnalités</div>
+        <div class="fleche">→</div>
+        <div class="bloc"><strong>Recette</strong>Le client vérifie que tout fonctionne comme prévu</div>
+        <div class="fleche">→</div>
+        <div class="bloc"><strong>Livraison</strong>Mise en ligne et passage de relais</div>
+        <div class="fleche">→</div>
+        <div class="bloc ambre"><strong>Bilan</strong>Ce qu'on garde et ce qu'on change</div>
+      </div>
+      <div class="encadre" style="margin-top: 22px;">
+        On ne démarre pas la réalisation tant que le besoin, les objectifs et le périmètre ne sont pas clairs. <strong>Une heure de cadrage économise des jours de travail.</strong>
+      </div>
+      <p class="petit muet">Recette : phase où le client teste le livrable et l'accepte (ou non) avant sa mise en service.</p>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Comprendre le besoin : le QQOQCCP</h2>
+    <div class="corps">
+      <table class="dense">
+        <tr><th style="width: 16%;">Question</th><th style="width: 38%;">Ce qu'on cherche</th><th>Pour le tournoi</th></tr>
+        <tr><td><strong>Quoi ?</strong></td><td>Le produit ou le service attendu</td><td>Une application web d'inscription et de scores</td></tr>
+        <tr><td><strong>Qui ?</strong></td><td>Le client, les utilisateurs, l'équipe</td><td>Bureau des étudiants, joueurs, arbitres</td></tr>
+        <tr><td><strong>Où ?</strong></td><td>Le lieu, le support</td><td>Sur téléphone, dans la salle du tournoi</td></tr>
+        <tr><td><strong>Quand ?</strong></td><td>Les échéances, les jalons</td><td>En ligne une semaine avant le tournoi</td></tr>
+        <tr><td><strong>Comment ?</strong></td><td>Les moyens, les contraintes</td><td>Gratuit, hébergé par l'école</td></tr>
+        <tr><td><strong>Combien ?</strong></td><td>Le budget, les quantités</td><td>0 €, 64 joueurs, 16 courses</td></tr>
+        <tr><td><strong>Pourquoi ?</strong></td><td>La raison d'être du projet</td><td>Fini les tableaux papier illisibles de l'an dernier</td></tr>
+      </table>
+    </div>
+    <aside class="notes">
+      Le « Pourquoi ? » est la question la plus importante : elle permet de trancher quand il faut renoncer à une fonctionnalité.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Le périmètre</h2>
+    <div class="corps">
+      <p>Le <strong>périmètre</strong> (ou <em>scope</em>) dit ce que le projet fera… et ce qu'il <strong>ne fera pas</strong>.</p>
+      <div class="colonnes">
+        <div class="carte">
+          <h3>Dans le périmètre</h3>
+          <ul class="dense">
+            <li>Inscription des joueurs</li>
+            <li>Grille des courses</li>
+            <li>Saisie des scores par les arbitres</li>
+            <li>Classement en direct</li>
+          </ul>
+        </div>
+        <div class="carte ambre">
+          <h3>Hors périmètre</h3>
+          <ul class="dense">
+            <li>Paiement des inscriptions</li>
+            <li>Application mobile à installer</li>
+            <li>Diffusion vidéo des courses</li>
+            <li>Galerie de photos</li>
+          </ul>
+        </div>
+      </div>
+      <div class="encadre marine" style="margin-top: 18px;">
+        Écrire le hors périmètre évite les « Ah, mais je pensais que… » trois jours avant la livraison.
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Découper le travail</h2>
+    <div class="corps">
+      <p>Un gros objectif est impossible à estimer. On le découpe jusqu'à obtenir des <strong>tâches</strong> qu'une personne peut réaliser en quelques heures ou quelques jours.</p>
+      <div class="chaine" style="margin-top: 16px;">
+        <div class="bloc ambre"><strong>Projet</strong>Application du tournoi</div>
+        <div class="fleche">→</div>
+        <div class="bloc"><strong>Fonctionnalité</strong>Saisie des scores</div>
+        <div class="fleche">→</div>
+        <div class="bloc"><strong>Tâches</strong>Maquette de l'écran · formulaire de score · calcul du classement · test avec un arbitre</div>
+      </div>
+      <div class="encadre" style="margin-top: 20px;">
+        Une tâche bien découpée a un <strong>verbe d'action</strong>, un <strong>responsable</strong> et un <strong>critère de fin</strong> : « Manon dessine la maquette de l'écran des scores, validée par un arbitre ».
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Estimer</h2>
+    <div class="corps">
+      <div class="colonnes">
+        <div>
+          <ul>
+            <li>Estimer, c'est prévoir le <strong>temps</strong> ou l'<strong>effort</strong> de chaque tâche</li>
+            <li>On estime bien ce qu'on a déjà fait. Le reste est une supposition</li>
+            <li>On estime <strong>à plusieurs</strong> : chacun voit des difficultés différentes</li>
+            <li>On garde une <strong>marge</strong> pour l'imprévu (malade, bug, changement d'avis du client)</li>
+          </ul>
+        </div>
+        <div class="carte ambre">
+          <h3>Deux unités courantes</h3>
+          <ul class="dense">
+            <li><strong>Jours-homme</strong> : une personne pendant une journée</li>
+            <li><strong>Points</strong> : un effort relatif. Une tâche à 2 points demande à peu près deux fois plus d'effort qu'une tâche à 1 point</li>
+          </ul>
+        </div>
+      </div>
+      <div class="encadre marine" style="margin-top: 18px;">
+        Une estimation n'est pas une promesse. On la <strong>révise</strong> dès qu'on en sait plus.
+      </div>
+    </div>
+    <aside class="notes">
+      Le terme « jour-homme » est consacré mais on entend de plus en plus « jour-personne ». Les points sont détaillés avec le Planning Poker dans la partie Scrum.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Planifier : le diagramme de Gantt</h2>
+    <div class="corps">
+      <table class="gantt">
+        <tr><th>Tâche</th><th>S1</th><th>S2</th><th>S3</th><th>S4</th><th>S5</th><th>S6</th></tr>
+        <tr><td>Recueil du besoin</td><td class="a"></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Maquettes</td><td></td><td class="b"></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>◆ Maquettes validées</td><td></td><td class="j">◆</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Inscriptions et grille</td><td></td><td></td><td class="b"></td><td class="b"></td><td></td><td></td></tr>
+        <tr><td>Scores et classement</td><td></td><td></td><td></td><td class="b"></td><td class="b"></td><td></td></tr>
+        <tr><td>Recette avec les arbitres</td><td></td><td></td><td></td><td></td><td class="a"></td><td></td></tr>
+        <tr><td>◆ Mise en ligne</td><td></td><td></td><td></td><td></td><td></td><td class="j">◆</td></tr>
+      </table>
+      <div class="encadre" style="margin-top: 18px;">
+        Le <strong>Gantt</strong> montre les tâches dans le temps, leurs <strong>dépendances</strong> (les scores attendent les maquettes) et les <strong>jalons</strong> ◆. Sur GitHub, la vue <em>Roadmap</em> en donne un équivalent.
+      </div>
+    </div>
+    <aside class="notes">
+      Inventé par Henry Gantt au début du XXe siècle. Un outil libre dédié existe (GanttProject), mais un tableur ou la vue Roadmap de GitHub Projects suffisent pour un petit projet.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Suivre l'avancement et rendre compte</h2>
+    <div class="corps">
+      <p>Chaque semaine, le chef de projet fait un <strong>point d'étape</strong> (ou <em>reporting</em>) au client, en quelques minutes :</p>
+      <div class="meteo" style="margin-top: 10px;">
+        <div style="background: #E5F4EA;"><strong>☀️ Dans les temps</strong><br>Tout avance comme prévu</div>
+        <div style="background: #FFF6E0;"><strong>⛅ Sous surveillance</strong><br>Un retard ou un risque, on a un plan</div>
+        <div style="background: #FBE5E5;"><strong>⛈️ En difficulté</strong><br>Une décision du client est nécessaire</div>
+      </div>
+      <ul style="margin-top: 16px;">
+        <li><strong>Ce qui est fait</strong> depuis le dernier point</li>
+        <li><strong>Ce qui reste à faire</strong> d'ici le prochain jalon</li>
+        <li><strong>Les blocages</strong> et ce qu'on attend du client</li>
+      </ul>
+    </div>
+    <aside class="notes">
+      C'est exactement le format du point d'étape de 3 minutes que chaque groupe fera à 15h30. Annoncer une mauvaise nouvelle tôt est une compétence : le client préfère un retard annoncé à une surprise.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section data-layout="section">
+    <div class="numero">#3</div>
+    <h2>Les méthodes de gestion de projet</h2>
+    <div class="sous-titre">Gérer un projet</div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Le modèle en cascade</h2>
+    <div class="corps">
+      <p>Les étapes s'enchaînent <strong>dans un ordre fixe</strong>. On ne passe à la suivante que lorsque la précédente est terminée et validée.</p>
+      <div class="cascade">
+        <div>Recueil des besoins</div>
+        <div>Conception</div>
+        <div>Développement</div>
+        <div>Tests</div>
+        <div>Mise en service</div>
+      </div>
+      <div class="encadre marine" style="margin-top: 20px;">
+        Simple et rassurant quand le besoin est connu d'avance et ne change pas. On l'appelle aussi méthode <strong>prédictive</strong> : tout est prévu au départ.
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Le cycle en V</h2>
+    <div class="corps">
+      <p>Une évolution de la cascade : chaque étape de conception correspond à une étape de <strong>vérification</strong>, préparée dès le départ.</p>
+      <div class="cycle-v">
+        <div class="g g1">Expression du besoin</div><div class="d d1">Recette : le client valide le besoin</div>
+        <div class="g g2">Spécifications fonctionnelles</div><div class="d d2">Tests de validation</div>
+        <div class="g g3">Conception détaillée</div><div class="d d3">Tests unitaires</div>
+        <div class="bas">Réalisation</div>
+      </div>
+      <div class="encadre" style="margin-top: 16px;">
+        On descend la branche gauche (concevoir), on remonte la branche droite (vérifier). Très utilisé dans l'industrie, la banque ou la défense, où les exigences sont stables et les erreurs coûteuses.
+      </div>
+      <p class="petit muet">Spécifications : description précise de ce que le logiciel doit faire. Tests unitaires : vérification de chaque petit morceau du programme pris isolément.</p>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Les limites des méthodes prédictives</h2>
+    <div class="corps">
+      <ul>
+        <li>Le client découvre le produit <strong>à la fin</strong>, parfois après des mois : c'est l'<strong>effet tunnel</strong></li>
+        <li>Entre-temps, le besoin a changé : nouveau règlement, concurrent, idée en cours de route</li>
+        <li>Changer d'avis coûte cher, car tout a été conçu d'un bloc</li>
+      </ul>
+      <div class="story" style="margin-top: 18px;">
+        Pour le tournoi : en semaine 4, le bureau des étudiants annonce qu'il y aura aussi une <strong>catégorie en équipe</strong>. En cascade, la conception est déjà figée. Que fait-on ?
+      </div>
+    </div>
+    <aside class="notes">
+      Laisser la salle proposer : renégocier, refuser, décaler la date… C'est la transition vers l'agilité.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Le Manifeste agile (2001)</h2>
+    <div class="corps">
+      <p>Dix-sept développeurs se réunissent pour proposer une autre façon de travailler. Ils écrivent <a href="https://agilemanifesto.org/iso/fr/manifesto.html" target="_blank">quatre valeurs</a> :</p>
+      <table>
+        <tr><th>Nous valorisons davantage…</th><th>… que</th></tr>
+        <tr><td><strong>Les individus et leurs interactions</strong></td><td>les processus et les outils</td></tr>
+        <tr><td><strong>Des logiciels opérationnels</strong></td><td>une documentation exhaustive</td></tr>
+        <tr><td><strong>La collaboration avec les clients</strong></td><td>la négociation contractuelle</td></tr>
+        <tr><td><strong>L'adaptation au changement</strong></td><td>le suivi d'un plan</td></tr>
+      </table>
+      <div class="encadre marine" style="margin-top: 16px;">
+        Les éléments de droite ont de la valeur. Ceux de gauche en ont <strong>davantage</strong>. L'agilité n'est pas l'absence de plan ou de documentation.
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Itératif et incrémental</h2>
+    <div class="corps">
+      <p>Une méthode agile livre le produit <strong>par petits morceaux utilisables</strong> à intervalles courts. Le plan est ajusté à chaque livraison.</p>
+      <div class="chaine" style="margin-top: 14px;">
+        <div class="bloc"><strong>Itération 1</strong>Inscription des joueurs. Le bureau des étudiants l'essaie.</div>
+        <div class="fleche">→</div>
+        <div class="bloc"><strong>Itération 2</strong>Grille des courses. Les joueurs donnent leur avis.</div>
+        <div class="fleche">→</div>
+        <div class="bloc ambre"><strong>Itération 3</strong>Scores, classement… et la catégorie en équipe, demandée entre-temps.</div>
+      </div>
+      <div class="encadre" style="margin-top: 20px;">
+        À chaque itération, le client voit un produit qui fonctionne. S'il faut s'arrêter plus tôt, il a déjà <strong>l'essentiel</strong>.
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Prédictif ou agile ?</h2>
+    <div class="corps">
+      <table>
+        <tr><th>Aspect</th><th>Cycle en V</th><th>Agile</th></tr>
+        <tr><td><strong>Besoin</strong></td><td>Connu et figé au départ</td><td>Précisé au fil du projet</td></tr>
+        <tr><td><strong>Livraison</strong></td><td>Une seule, à la fin</td><td>Régulière, toutes les 1 à 4 semaines</td></tr>
+        <tr><td><strong>Client</strong></td><td>Présent au début et à la fin</td><td>Impliqué tout au long du projet</td></tr>
+        <tr><td><strong>Changement</strong></td><td>Coûteux, à éviter</td><td>Attendu, intégré au plan</td></tr>
+        <tr><td><strong>Idéal pour</strong></td><td>Exigences stables, forte réglementation</td><td>Besoin incertain, produit innovant</td></tr>
+      </table>
+      <div class="encadre marine" style="margin-top: 16px;">
+        Il n'y a pas de bonne méthode dans l'absolu. Beaucoup d'entreprises <strong>combinent</strong> les deux : un cadrage solide au départ puis des itérations courtes.
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section data-layout="section">
+    <div class="numero">#4</div>
+    <h2>Scrum et Kanban en pratique</h2>
+    <div class="sous-titre">Gérer un projet</div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Scrum en un coup d'œil</h2>
+    <div class="corps">
+      <p><a href="https://scrumguides.org/scrum-guide.html" target="_blank">Scrum</a> est la méthode agile la plus répandue. Le travail avance par <strong>sprints</strong> : des cycles de 1 à 4 semaines.</p>
+      <div class="scrum">
+        <div class="boite"><strong>Product backlog</strong><br>Toutes les fonctionnalités, par priorité</div>
+        <span class="fl">→</span>
+        <div class="boite"><strong>Sprint planning</strong><br>On choisit ce qu'on fait ce sprint</div>
+        <span class="fl">→</span>
+        <div class="boite sprint"><strong>Sprint · 1 à 4 semaines</strong><br>L'équipe réalise le sprint backlog<br><span class="petit-cercle">Daily · 15 min chaque jour</span></div>
+        <span class="fl">→</span>
+        <div class="boite"><strong>Sprint review</strong><br>On montre l'incrément au client</div>
+        <span class="fl">→</span>
+        <div class="boite"><strong>Rétrospective</strong><br>On améliore notre façon de travailler</div>
+      </div>
+      <div class="encadre" style="margin-top: 20px;">
+        Puis un nouveau sprint commence. Trois piliers : <strong>transparence</strong> (tout le monde voit l'état réel), <strong>inspection</strong> (on vérifie souvent), <strong>adaptation</strong> (on corrige vite).
+      </div>
+      <p class="petit muet"><em>Scrum</em> vient du rugby : c'est la mêlée, où l'équipe avance ensemble. Le guide officiel tient en une quinzaine de pages.</p>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Les rôles dans Scrum</h2>
+    <div class="corps">
+      <div class="colonnes c3">
+        <div class="carte ambre">
+          <h3>Product Owner</h3>
+          Représente le client. Il écrit et <strong>priorise</strong> le backlog. Il décide de ce qui a le plus de valeur.
+        </div>
+        <div class="carte">
+          <h3>Scrum Master</h3>
+          Garant de la méthode. Il anime les réunions et <strong>lève les obstacles</strong> qui bloquent l'équipe. Ce n'est pas un chef.
+        </div>
+        <div class="carte pleine">
+          <h3>Developers</h3>
+          Toute l'équipe qui réalise le produit : développeurs, mais aussi designers ou testeurs. Elle décide <strong>comment</strong> faire.
+        </div>
+      </div>
+      <div class="encadre marine" style="margin-top: 22px;">
+        Pour le tournoi : Manon est Product Owner, Cosmo Scrum Master. Tous les trois, moi compris, sommes Developers.
+      </div>
+    </div>
+    <aside class="notes">
+      Le Scrum Guide 2020 parle de « Developers » pour toute l'équipe de réalisation, même ceux qui ne codent pas. Une même personne peut cumuler un rôle et faire partie des Developers, comme dans les petites équipes de l'atelier.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>La user story</h2>
+    <div class="corps">
+      <p>Chaque élément du backlog est écrit du point de vue de l'utilisateur, en une phrase :</p>
+      <div class="story">
+        <strong>En tant qu'</strong>arbitre,<br>
+        <strong>je veux</strong> saisir le résultat d'une course depuis mon téléphone<br>
+        <strong>afin de</strong> mettre à jour le classement sans attendre la fin du tournoi.
+      </div>
+      <p style="margin-top: 14px;"><strong>Critères d'acceptation</strong> : comment le client saura que c'est terminé.</p>
+      <ul class="dense">
+        <li>Je choisis la course puis la position de chaque joueur ;</li>
+        <li>le classement est mis à jour en moins de 10 secondes ;</li>
+        <li>je peux corriger une erreur de saisie.</li>
+      </ul>
+    </div>
+    <aside class="notes">
+      Insister sur le « afin de » : c'est lui qui permet au Product Owner de prioriser. Une story sans critère d'acceptation finit toujours en dispute à la recette.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Prioriser le backlog : MoSCoW</h2>
+    <div class="corps">
+      <table>
+        <tr><th style="width: 22%;">Priorité</th><th>Signification</th><th style="width: 36%;">Pour le tournoi</th></tr>
+        <tr><td><span class="etiquette">Must</span> doit</td><td>Indispensable. Sans elle, le projet échoue</td><td>Inscription, grille, saisie des scores</td></tr>
+        <tr><td><span class="etiquette">Should</span> devrait</td><td>Importante, mais on peut s'en passer au début</td><td>Classement en direct sur grand écran</td></tr>
+        <tr><td><span class="etiquette ambre">Could</span> pourrait</td><td>Un plus, si le temps le permet</td><td>Statistiques par personnage</td></tr>
+        <tr><td><span class="etiquette ambre">Won't</span> pas cette fois</td><td>Écartée explicitement pour cette version</td><td>Paiement en ligne</td></tr>
+      </table>
+      <div class="encadre marine" style="margin-top: 18px;">
+        Le premier sprint ne contient que des <strong>Must</strong>. C'est le Product Owner qui tranche, avec le client.
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Estimer à plusieurs : le Planning Poker</h2>
+    <div class="corps">
+      <div class="cartes-poker">
+        <span>1</span><span>2</span><span>3</span><span>5</span><span>8</span><span>13</span><span class="q">?</span>
+      </div>
+      <ol style="margin-top: 10px;">
+        <li>Le Product Owner lit une user story. L'équipe pose ses questions</li>
+        <li>Chacun choisit une carte <strong>en secret</strong>, puis tout le monde la retourne en même temps</li>
+        <li>Les estimations extrêmes s'expliquent : « j'ai mis 13 parce que… »</li>
+        <li>On revote jusqu'à se mettre d'accord</li>
+      </ol>
+      <div class="encadre" style="margin-top: 14px;">
+        Les cartes suivent la suite de Fibonacci : plus une tâche est grosse, plus l'estimation est incertaine. Une story à <strong>13 ou plus</strong> est trop grosse : on la découpe.
+      </div>
+    </div>
+    <aside class="notes">
+      Le vote secret évite que tout le monde s'aligne sur le plus expérimenté. La carte « ? » signifie « je ne comprends pas assez la story pour l'estimer ».
+      Cet après-midi, pas besoin d'application : un papier retourné suffit, à Versailles comme à Clermont.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Du backlog au sprint</h2>
+    <div class="corps">
+      <div class="colonnes">
+        <div>
+          <ul>
+            <li>La <strong>vélocité</strong> est le nombre de points que l'équipe réalise en un sprint</li>
+            <li>Au premier sprint, on ne la connaît pas : on fixe une <strong>capacité</strong> prudente</li>
+            <li>Au <strong>sprint planning</strong>, on prend les stories les plus prioritaires jusqu'à remplir la capacité</li>
+          </ul>
+        </div>
+        <div class="carte ambre">
+          <h3>Pour le tournoi</h3>
+          <ul class="dense">
+            <li>Capacité : 20 points par sprint</li>
+            <li>Sprint 1 : inscription (5), grille (8), connexion des arbitres (5) = 18 points</li>
+            <li>Il reste 2 points : on n'ajoute pas une story à 5</li>
+          </ul>
+        </div>
+      </div>
+      <div class="encadre marine" style="margin-top: 18px;">
+        Chaque fin de sprint est un <strong>jalon</strong> : le client voit et valide l'incrément.
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Les artefacts et la définition de « terminé »</h2>
+    <div class="corps">
+      <div class="colonnes c3">
+        <div class="carte"><h3>Product backlog</h3>La liste ordonnée de tout ce que le produit pourrait contenir. Elle évolue tout le temps</div>
+        <div class="carte"><h3>Sprint backlog</h3>Les stories choisies pour le sprint et les tâches pour les réaliser</div>
+        <div class="carte"><h3>Incrément</h3>Le produit utilisable obtenu à la fin du sprint</div>
+      </div>
+      <div class="encadre" style="margin-top: 22px;">
+        La <strong>Definition of Done</strong> est la liste de contrôle commune à toutes les stories : relue par un autre membre, testée, documentée, validée par le Product Owner. Une story à moitié faite n'est <strong>pas terminée</strong>.
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Les événements de Scrum</h2>
+    <div class="corps">
+      <table>
+        <tr><th style="width: 22%;">Événement</th><th>Ce qu'on y fait</th><th class="num" style="width: 22%;">Durée max. (sprint de 2 semaines)</th></tr>
+        <tr><td><strong>Sprint planning</strong></td><td>Choisir les stories du sprint et les découper en tâches</td><td class="num">4 h</td></tr>
+        <tr><td><strong>Daily</strong></td><td>Chaque matin, debout : qu'ai-je fait hier, que fais-je aujourd'hui, qu'est-ce qui me bloque ?</td><td class="num">15 min</td></tr>
+        <tr><td><strong>Sprint review</strong></td><td>Montrer l'incrément au client et recueillir ses retours</td><td class="num">2 h</td></tr>
+        <tr><td><strong>Rétrospective</strong></td><td>L'équipe améliore sa façon de travailler</td><td class="num">1 h 30</td></tr>
+      </table>
+      <div class="encadre marine" style="margin-top: 18px;">
+        Chaque réunion a une durée maximale (<em>timebox</em>). Une réunion sans objectif ni limite de temps est une réunion perdue.
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Exemple : le daily du jour 3</h2>
+    <div class="corps">
+      <table>
+        <tr><th style="width: 14%;">Qui</th><th>Hier</th><th>Aujourd'hui</th><th style="width: 26%;">Blocage</th></tr>
+        <tr><td><strong>Manon</strong></td><td>Maquette de l'écran d'inscription</td><td>Maquette de la grille</td><td>Aucun</td></tr>
+        <tr><td><strong>Cosmo</strong></td><td>Formulaire d'inscription</td><td>Enregistrement des joueurs</td><td>J'attends les règles du tournoi</td></tr>
+        <tr><td><strong>Chris</strong></td><td>Hébergement de l'application</td><td>J'aide Cosmo</td><td>Aucun</td></tr>
+      </table>
+      <div class="encadre" style="margin-top: 20px;">
+        Le daily n'est <strong>pas</strong> une réunion pour résoudre les problèmes. Le blocage de Cosmo est noté. Cosmo, en tant que Scrum Master, appelle le bureau des étudiants juste après.
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Kanban : visualiser le flux</h2>
+    <div class="corps">
+      <div class="kanban">
+        <div class="col"><h4>Backlog</h4>
+          <div class="ticket">Statistiques par personnage <span class="pts">3</span></div>
+          <div class="ticket">Classement sur grand écran <span class="pts">5</span></div>
+        </div>
+        <div class="col"><h4>À faire</h4>
+          <div class="ticket">Connexion des arbitres <span class="pts">5</span></div>
+        </div>
+        <div class="col"><h4>En cours · 2 max.</h4>
+          <div class="ticket ambre">Grille des courses <span class="pts">8</span><br><span class="muet">Manon</span></div>
+          <div class="ticket ambre">Inscription des joueurs <span class="pts">5</span><br><span class="muet">Cosmo</span></div>
+        </div>
+        <div class="col"><h4>Terminé</h4>
+          <div class="ticket">Hébergement <span class="pts">2</span><br><span class="muet">Chris</span></div>
+        </div>
+      </div>
+      <div class="encadre marine" style="margin-top: 14px;">
+        Une carte par tâche, qui avance de gauche à droite. On <strong>limite</strong> le nombre de cartes « En cours » : on finit avant de commencer autre chose.
+      </div>
+    </div>
+    <aside class="notes">
+      Kanban signifie « étiquette » en japonais : la méthode vient des usines Toyota. Elle n'impose ni sprint ni rôle, seulement un flux visible et limité. Beaucoup d'équipes Scrum utilisent un tableau Kanban pour suivre leur sprint.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Un tableau Kanban avec Trello</h2>
+    <div class="corps">
+      <div class="colonnes">
+        <div>
+          <ul>
+            <li>Un <strong>tableau</strong> par projet, partagé avec l'équipe</li>
+            <li>Une <strong>liste</strong> par colonne : Backlog, À faire, En cours, En revue, Terminé</li>
+            <li>Une <strong>carte</strong> par user story, avec :
+              <ul class="dense">
+                <li>des membres (qui s'en occupe) ;</li>
+                <li>une étiquette (priorité, points) ;</li>
+                <li>une date limite ;</li>
+                <li>une checklist pour les critères d'acceptation.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="carte">
+          <h3>Les bonnes habitudes</h3>
+          <ul class="dense">
+            <li>Le tableau reflète <strong>la réalité</strong>, pas les intentions</li>
+            <li>Chacun déplace <strong>ses</strong> cartes, au fil de l'eau</li>
+            <li>Une carte « En cours » a toujours un responsable</li>
+            <li>On regarde le tableau ensemble à chaque daily</li>
+          </ul>
+        </div>
+      </div>
+      <p class="petit muet" style="margin-top: 14px;"><a href="https://trello.com/" target="_blank">Trello</a> est gratuit pour une petite équipe. Des alternatives libres existent, comme <a href="https://kanboard.org/" target="_blank">Kanboard</a> ou <a href="https://wekan.github.io/" target="_blank">Wekan</a>, que l'on peut héberger soi-même.</p>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>La rétrospective</h2>
+    <div class="corps">
+      <p>À la fin de chaque sprint, l'équipe prend du recul sur <strong>sa façon de travailler</strong>, pas sur le produit.</p>
+      <div class="colonnes c3" style="margin-top: 10px;">
+        <div class="carte"><h3>▶ Commencer</h3>Un daily à heure fixe, même à distance</div>
+        <div class="carte ambre"><h3>■ Arrêter</h3>Commencer une tâche sans la déplacer sur le tableau</div>
+        <div class="carte pleine"><h3>↻ Continuer</h3>Faire relire chaque maquette par un arbitre</div>
+      </div>
+      <div class="encadre marine" style="margin-top: 22px;">
+        On repart avec <strong>une ou deux actions concrètes</strong>, chacune avec un responsable. Une rétrospective sans action ne sert à rien.
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Quelques questions</h2>
+    <div class="corps">
+      <ol>
+        <li>Quelle est la différence entre un livrable et un jalon ?</li>
+        <li>Qui est la MOA dans le projet du tournoi ? Et la MOE ?</li>
+        <li>Pourquoi le cycle en V convient-il mal à un besoin qui change ?</li>
+        <li>Quelle est la différence entre le product backlog et le sprint backlog ?</li>
+        <li>Pourquoi vote-t-on en secret au Planning Poker ?</li>
+        <li>Quel est le rôle du Scrum Master ? Est-ce le chef de l'équipe ?</li>
+      </ol>
+    </div>
+    <aside class="notes">
+      Faire répondre en alternant salle et Clermont. Réponses : 1. Le livrable est un résultat remis, le jalon une date de vérification. 2. MOA = bureau des étudiants, MOE = Chris, Manon et Cosmo.
+      3. Tout est conçu au départ, un changement remet en cause les étapes déjà validées. 4. Tout le produit contre ce qui est choisi pour un sprint.
+      5. Pour ne pas s'aligner sur l'avis du plus expérimenté. 6. Il garantit la méthode et lève les obstacles. Ce n'est pas un chef.
+    </aside>
+  </section>
+
+  <!-- ================================================================== -->
+  <section>
+    <h2>Cet après-midi : à vous de jouer</h2>
+    <div class="corps">
+      <div class="chaine">
+        <div class="bloc ambre"><strong>1. Rôles</strong>Client, Product Owner, Scrum Master</div>
+        <div class="fleche">→</div>
+        <div class="bloc"><strong>2. Besoin</strong>Le client explique, l'équipe reformule</div>
+        <div class="fleche">→</div>
+        <div class="bloc"><strong>3. Backlog</strong>User stories et priorités</div>
+        <div class="fleche">→</div>
+        <div class="bloc"><strong>4. Estimation</strong>Planning Poker, deux sprints</div>
+        <div class="fleche">→</div>
+        <div class="bloc ambre"><strong>5. Trello</strong>Le tableau de l'équipe</div>
+      </div>
+      <div class="encadre marine" style="margin-top: 22px;">
+        À 15h30, chaque groupe fait un <strong>point d'étape de 3 minutes</strong> : où en êtes-vous, que reste-t-il, qu'est-ce qui bloque ?
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <section data-layout="titre">
+    <h1>Des questions ?</h1>
+    <div class="sous-titre">
+      Chris CHEVALIER<br>
+      chris.chevalier@ecole-hexagone.com
+    </div>
+  </section>
+
+</div>
+</div>
+
+<script src="../assets/vendor/reveal/dist/reveal.js"></script>
+<script src="../assets/vendor/reveal/plugin/highlight/highlight.js"></script>
+<script src="../assets/vendor/reveal/plugin/notes/notes.js"></script>
+<script src="../assets/js/hexagone.js"></script>
+</body>
+</html>
